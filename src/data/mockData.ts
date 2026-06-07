@@ -1,0 +1,473 @@
+// ─── NEWS DATA ───────────────────────────────────────────────────────────────
+export interface NewsItem {
+  id: number;
+  date: string;
+  date_kz?: string;
+  date_en?: string;
+  title: string;
+  title_kz?: string;
+  title_en?: string;
+  preview: string;
+  preview_kz?: string;
+  preview_en?: string;
+  fullText: string;
+  fullText_kz?: string;
+  fullText_en?: string;
+  previewImages: string[];
+  galleryImages: string[];
+}
+
+export const newsData: NewsItem[] = [
+  {
+    id: 1,
+    date: "6 октября 2025",
+    date_kz: "2025 жылғы 6 қазан",
+    date_en: "October 6, 2025",
+    title: "Научный семинар по радиоэкологии Семейского региона в Alikhan Bokeikhan University",
+    title_kz: "Alikhan Bokeikhan University-де Семей аймағының радиоэкологиясы бойынша ғылыми семинар",
+    title_en: "Scientific Seminar on Radioecology of the Semey Region at Alikhan Bokeikhan University",
+    preview:
+      "6 октября 2025 года в Alikhan Bokeikhan University состоялся научный семинар, посвящённый вопросам радиоэкологии Семейского региона в рамках проекта АР22783154.",
+    preview_kz:
+      "2025 жылғы 6 қазанда Alikhan Bokeikhan University-де АР22783154 жобасы шеңберінде Семей аймағының радиоэкологиясы мәселелеріне арналған ғылыми семинар өтті.",
+    preview_en:
+      "On October 6, 2025, a scientific seminar on radioecology of the Semey region was held at Alikhan Bokeikhan University within the framework of project AP22783154.",
+    fullText:
+      "6 октября 2025 года в Alikhan Bokeikhan University состоялся научный семинар, посвящённый вопросам радиоэкологии в Семейском регионе, организованный в рамках проекта АР22783154 — «Комплексное радиоэкологическое исследование бассейна р. Шаган и разработка рекомендаций по минимизации негативного влияния на окружающую среду и население».\n\nВедущие учёные Казахстана и стран ближнего зарубежья собрались за круглым столом, где обсудили актуальные вопросы исследования радиоэкологической обстановки в регионе.\n\nСреди участников семинара:\n— Лукашенко С.Н., д.б.н., главный научный сотрудник Всероссийского научно-исследовательского института радиологии и агроэкологии (НИЦ «Курчатовский институт» — ВНИИРАЭ, Обнинск);\n— Михайлов А.В., научный сотрудник ВНИИРАЭ (Обнинск);\n— Байгазинов Ж.А., к.б.н, PhD, Председатель Правления АО «Парк ядерных технологий», старший преподаватель кафедры прикладной биологии Alikhan Bokeikhan University;\n— Актаев М.Р., PhD, главный научный сотрудник Департамента научных исследований и развития АО «Парк ядерных технологий»;\n— Темиржанова А.Е., докторант Alikhan Bokeikhan University, сотрудник КазНУ им. аль-Фараби.\n\nУчастники обсудили актуальные результаты исследований по миграции трития в экосистемах, загрязнению поверхностных и подземных вод р. Шаган, а также оценке возможности ведения хозяйственной деятельности на территории бывшего Семипалатинского испытательного полигона.\n\nСеминар стал важной площадкой для обмена опытом между учёными Казахстана и России, направленной на развитие экологической науки и обеспечение радиационной безопасности региона.",
+    fullText_kz:
+      "2025 жылғы 6 қазанда Alikhan Bokeikhan University-де АР22783154 — «Шаған өзені бассейнінің кешенді радиоэкологиялық зерттеуі және қоршаған орта мен халыққа теріс әсерді барынша азайту бойынша ұсынымдар әзірлеу» жобасы шеңберінде ұйымдастырылған, Семей аймағының радиоэкологиясы мәселелеріне арналған ғылыми семинар өтті.\n\nҚазақстан мен жақын шет елдердің жетекші ғалымдары дөңгелек үстел басына жиналып, аймақтағы радиоэкологиялық жағдайды зерттеудің өзекті мәселелерін талқылады.\n\nСеминар қатысушылары:\n— Лукашенко С.Н., б.ғ.д., Бүкілресейлік радиология және агроэкология ғылыми-зерттеу институтының (ҒЗО «Курчатов институты» — ВНИИРАЭ, Обнинск) бас ғылыми қызметкері;\n— Михайлов А.В., ВНИИРАЭ (Обнинск) ғылыми қызметкері;\n— Байгазинов Ж.А., б.ғ.к., PhD, «Ядролық технологиялар паркі» АҚ Басқарма Төрағасы, Alikhan Bokeikhan University қолданбалы биология кафедрасының аға оқытушысы;\n— Актаев М.Р., PhD, «Ядролық технологиялар паркі» АҚ Ғылыми зерттеулер және даму департаментінің бас ғылыми қызметкері;\n— Темиржанова А.Е., Alikhan Bokeikhan University докторанты, әл-Фараби атындағы ҚазҰУ қызметкері.\n\nҚатысушылар тритийдің экожүйелерде миграциясы, Шаған өзенінің беткі және жерасты суларының ластануы, сондай-ақ бұрынғы Семей ядролық сынақ полигоны аумағында шаруашылық қызметті жүргізу мүмкіндігін бағалау бойынша зерттеулердің өзекті нәтижелерін талқылады.\n\nСеминар экологиялық ғылымды дамытуға және аймақтың радиациялық қауіпсіздігін қамтамасыз етуге бағытталған Қазақстан мен Ресей ғалымдары арасындағы тәжірибе алмасудың маңызды алаңына айналды.",
+    fullText_en:
+      "On October 6, 2025, a scientific seminar dedicated to radioecology issues in the Semey region was held at Alikhan Bokeikhan University, organised within the framework of project AP22783154 — «Comprehensive radioecological study of the Shagan River basin and development of recommendations for minimising negative impacts on the environment and population».\n\nLeading scientists from Kazakhstan and neighbouring countries gathered at a round table to discuss current issues of radioecological research in the region.\n\nSeminar participants:\n— S.N. Lukashenko, Dr. Sci. (Biol.), Chief Research Scientist at the All-Russian Scientific Research Institute of Radiology and Agroecology (NRC «Kurchatov Institute» — ARRIRAE, Obninsk);\n— A.V. Mikhailov, Research Scientist at ARRIRAE (Obninsk);\n— Zh.A. Baigazinov, Cand. Sci. (Biol.), PhD, Chairman of the Board of JSC «Nuclear Technology Park», Senior Lecturer at Alikhan Bokeikhan University;\n— M.R. Aktayev, PhD, Chief Research Scientist of the Scientific Research and Development Department, JSC «Nuclear Technology Park»;\n— A.E. Temirzhanova, Doctoral candidate at Alikhan Bokeikhan University, researcher at Al-Farabi Kazakh National University.\n\nParticipants discussed current research results on tritium migration in ecosystems, contamination of surface and groundwater of the Shagan River, and assessment of the possibility of conducting economic activities on the territory of the former Semipalatinsk Nuclear Test Site.\n\nThe seminar became an important platform for the exchange of expertise between scientists from Kazakhstan and Russia, aimed at developing environmental science and ensuring radiation safety of the region.",
+    previewImages: [
+      "/news/seminar7.webp",
+      "/news/seminar1.webp",
+    ],
+    galleryImages: [
+      "/news/seminar1.webp",
+      "/news/seminar2.webp",
+      "/news/seminar3.webp",
+      "/news/seminar4.webp",
+      "/news/seminar5.webp",
+      "/news/seminar6.webp",
+      "/news/seminar7.webp",
+      "/news/seminar8.webp",
+      "/news/seminar9.webp",
+      "/news/seminar10.webp",
+      "/news/seminar11.webp",
+    ],
+  },
+];
+
+// ─── GALLERY DATA ─────────────────────────────────────────────────────────────
+export interface GalleryImage {
+  id: number;
+  src: string;
+  alt: string;
+  alt_kz?: string;
+  alt_en?: string;
+  caption: string;
+  caption_kz?: string;
+  caption_en?: string;
+}
+
+export const galleryImages: GalleryImage[] = [
+  {
+    id: 1,
+    src: "/gallery/gallery1.jpg",
+    alt: "Полевые измерения с GPS-навигатором",
+    alt_kz: "GPS-навигаторымен далалық өлшеулер",
+    alt_en: "Field measurements with GPS navigator",
+    caption: "GPS-привязка точки мониторинга. Отбор проб растительности в степи",
+    caption_kz: "Бақылау нүктесін GPS-байластыру. Далада өсімдік үлгілерін іріктеу",
+    caption_en: "GPS positioning of monitoring point. Vegetation sampling in the steppe",
+  },
+  {
+    id: 2,
+    src: "/gallery/gallery2.jpg",
+    alt: "Откачка воды из скважины",
+    alt_kz: "Ұңғымадан су айдау",
+    alt_en: "Groundwater extraction from monitoring well",
+    caption: "Откачка пробы подземной воды из мониторинговой скважины",
+    caption_kz: "Мониторингтік ұңғымадан жерасты суының үлгісін айдау",
+    caption_en: "Groundwater sample extraction from a monitoring well",
+  },
+  {
+    id: 3,
+    src: "/gallery/gallery3.jpg",
+    alt: "Атмосферный пробоотбор трития",
+    alt_kz: "Тритийдің атмосфералық үлгі іріктегіші",
+    alt_en: "Atmospheric tritium sampling",
+    caption: "Регистрация показаний атмосферного пробоотборника трития в полевых условиях",
+    caption_kz: "Далалық жағдайда тритийдің атмосфералық үлгі іріктегіші көрсеткіштерін тіркеу",
+    caption_en: "Recording readings of the atmospheric tritium sampler in field conditions",
+  },
+  {
+    id: 4,
+    src: "/gallery/gallery4.jpg",
+    alt: "Отбор проб воды из реки Шаган",
+    alt_kz: "Шаған өзенінен су үлгілерін іріктеу",
+    alt_en: "Water sampling from the Shagan River",
+    caption: "Отбор проб поверхностной воды непосредственно из русла реки Шаган",
+    caption_kz: "Шаған өзенінің арнасынан тікелей беткі су үлгілерін іріктеу",
+    caption_en: "Surface water sampling directly from the Shagan River channel",
+  },
+  {
+    id: 5,
+    src: "/gallery/gallery5.jpg",
+    alt: "Эксперимент с птицей",
+    alt_kz: "Құспен тәжірибе",
+    alt_en: "Poultry sampling experiment",
+    caption: "Отбор проб продукции птицеводства для определения содержания трития",
+    caption_kz: "Тритий мөлшерін анықтауға арналған құс шаруашылығы өнімдерінің үлгілерін іріктеу",
+    caption_en: "Sampling poultry products to determine tritium content",
+  },
+  {
+    id: 6,
+    src: "/gallery/gallery6.jpg",
+    alt: "Мобильный полевой лагерь",
+    alt_kz: "Мобильді далалық лагерь",
+    alt_en: "Mobile field camp",
+    caption: "Мобильная полевая база: генератор, атмосферный пробоотборник и трейлер",
+    caption_kz: "Мобильді далалық база: генератор, атмосфералық үлгі іріктегіш және трейлер",
+    caption_en: "Mobile field base: generator, atmospheric sampler and trailer",
+  },
+  {
+    id: 7,
+    src: "/gallery/gallery7.jpg",
+    alt: "Работа на берегу водохранилища",
+    alt_kz: "Су қоймасының жағасындағы жұмыс",
+    alt_en: "Work on the reservoir bank",
+    caption: "Установка оборудования на береговом откосе водохранилища. Вид сверху",
+    caption_kz: "Су қоймасының жағалық беткейіне жабдық орнату. Жоғарыдан көрініс",
+    caption_en: "Equipment installation on the reservoir bank slope. Aerial view",
+  },
+  {
+    id: 8,
+    src: "/gallery/gallery8.jpg",
+    alt: "Дежурство у оборудования в степи",
+    alt_kz: "Далада жабдық басында кезекшілік",
+    alt_en: "On duty at equipment in the steppe",
+    caption: "Ведение полевого журнала у атмосферного пробоотборника. Степной участок",
+    caption_kz: "Атмосфералық үлгі іріктегіш жанында далалық журнал жүргізу. Далалық учаске",
+    caption_en: "Maintaining field log at the atmospheric sampler. Steppe section",
+  },
+  {
+    id: 9,
+    src: "/gallery/gallery9.jpg",
+    alt: "Установка подземного оборудования",
+    alt_kz: "Жерасты жабдығын орнату",
+    alt_en: "Underground equipment installation",
+    caption: "Монтаж подземного пробоотборника на мониторинговой точке",
+    caption_kz: "Мониторинг нүктесінде жерасты үлгі іріктегішін монтаждау",
+    caption_en: "Installation of underground sampler at a monitoring point",
+  },
+  {
+    id: 10,
+    src: "/gallery/gallery10.jpg",
+    alt: "Групповой отбор проб почвы",
+    alt_kz: "Топырақ үлгілерін топтық іріктеу",
+    alt_en: "Group soil sampling",
+    caption: "Совместный отбор образцов почвы группой исследователей в открытой степи",
+    caption_kz: "Ашық далада зерттеушілер тобының бірлескен топырақ үлгілерін іріктеуі",
+    caption_en: "Joint soil sampling by a group of researchers in open steppe",
+  },
+  {
+    id: 11,
+    src: "/gallery/gallery11.jpg",
+    alt: "Полевая работа на закате",
+    alt_kz: "Күн батысында далалық жұмыс",
+    alt_en: "Field work at sunset",
+    caption: "Обслуживание оборудования для отбора проб воздуха. Закат над бассейном Шаган",
+    caption_kz: "Ауа үлгілерін іріктеуге арналған жабдықты техникалық қызмет көрсету. Шаған бассейні үстіндегі күн батысы",
+    caption_en: "Servicing air sampling equipment. Sunset over the Shagan basin",
+  },
+  {
+    id: 12,
+    src: "/gallery/gallery12.jpg",
+    alt: "Документирование ландшафта",
+    alt_kz: "Ландшафтты құжаттандыру",
+    alt_en: "Landscape documentation",
+    caption: "Фотофиксация точки мониторинга и прилегающего степного ландшафта",
+    caption_kz: "Мониторинг нүктесі мен іргелес далалық ландшафтты фототіркеу",
+    caption_en: "Photo documentation of the monitoring point and adjacent steppe landscape",
+  },
+  {
+    id: 13,
+    src: "/gallery/gallery13.jpg",
+    alt: "Подготовка образцов птицеводства",
+    alt_kz: "Құс шаруашылығы үлгілерін дайындау",
+    alt_en: "Preparation of livestock samples",
+    caption: "Пробоподготовка образцов продукции животноводства для спектрометрического анализа",
+    caption_kz: "Спектрометриялық талдауға арналған мал шаруашылығы өнімдері үлгілерін дайындау",
+    caption_en: "Sample preparation of livestock products for spectrometric analysis",
+  },
+];
+
+// ─── TEAM DATA ────────────────────────────────────────────────────────────────
+export interface TeamMember {
+  id: number;
+  name: string;
+  degree: string;
+  degree_kz?: string;
+  degree_en?: string;
+  role: string;
+  role_kz?: string;
+  role_en?: string;
+  avatar: string;
+  bio: string;
+  bio_kz?: string;
+  bio_en?: string;
+  responsibility: string;
+  responsibility_kz?: string;
+  responsibility_en?: string;
+  publications: string[];
+  publications_kz?: string[];
+  publications_en?: string[];
+}
+
+export const teamMembers: TeamMember[] = [
+  {
+    id: 1,
+    name: "Байгазинов Жанат Абылканович",
+    degree: "Кандидат биологических наук",
+    degree_kz: "Биология ғылымдарының кандидаты",
+    degree_en: "Candidate of Biological Sciences, PhD",
+    role: "Научный руководитель",
+    role_kz: "Ғылыми жетекші",
+    role_en: "Principal Investigator",
+    avatar: "/team/member2.png",
+    bio: "Байгазинов Ж.А. обладает 17-летним опытом работы в области обеспечения радиационной безопасности, из которых 15 лет он провёл в Институте радиационной безопасности и экологии НЯЦ РК. Участвовал в радиоэкологических, радиобиологических, цитогенетических и эпидемиологических исследованиях, выступая как ответственный исполнитель и научный руководитель работ по государственным научно-техническим программам и международным проектам (проекты Европейского Радиоэкологического Альянса, Европейской Комиссии, МНТЦ; MEXT Японии). За вклад в развитие атомной энергии Казахстана удостоен почётной грамоты Министерства энергетики РК и медали «Лучший преподаватель вуза» МОН РК. Является автором и соавтором более 50 статей, тезисов и научных работ в области радиобиологии и радиоэкологии, включая около 20 публикаций совместно с учёными из Великобритании, Испании, России, Италии, Венгрии, Японии и Казахстана.",
+    bio_kz: "Байгазинов Ж.А. радиациялық қауіпсіздікті қамтамасыз ету саласында 17 жылдық тәжірибеге ие, оның 15 жылын ҚР ЯЦ Радиациялық қауіпсіздік және экология институтында жұмыс істеді. Мемлекеттік ғылыми-техникалық бағдарламалар мен халықаралық жобалар (Еуропалық Радиоэкологиялық Альянс, Еуропалық Комиссия, ХҒТОД; Жапония MEXT жобалары) бойынша жауапты орындаушы және ғылыми жетекші ретінде радиоэкологиялық, радиобиологиялық, цитогенетикалық және эпидемиологиялық зерттеулерге қатысты. Қазақстандағы атом энергиясын дамытуға қосқан үлесі үшін ҚР Энергетика министрлігінің Құрмет грамотасымен және ҚР БҒМ «Ең үздік жоғары оқу орны оқытушысы» медалімен марапатталды. Радиобиология және радиоэкология саласындағы 50-ден астам мақалалар, тезистер мен ғылыми жұмыстардың авторы және соавторы.",
+    responsibility: "Руководитель проекта. Общее руководство работами, постановка задач, координация экспериментальных и аналитических исследований, подготовка отчётов и статей.",
+    responsibility_kz: "Жоба жетекшісі. Жұмыстарды жалпы басқару, міндеттер қою, эксперименттік және аналитикалық зерттеулерді үйлестіру, есептемелер мен мақалаларды дайындау.",
+    responsibility_en: "Project leader. Overall management, task setting, coordination of experimental and analytical research, preparation of reports and publications.",
+    bio_en: "Zh.A. Baigazinov has 17 years of experience in radiation safety, including 15 years at the Institute of Radiation Safety and Ecology of the NNC RK. He has participated in radioecological, radiobiological, cytogenetic and epidemiological studies as responsible executor and scientific supervisor under national R&D programmes and international projects (European Radioecological Alliance, European Commission, ISTC; MEXT Japan). Awarded the Certificate of Honour of the Ministry of Energy of RK and the «Best University Teacher» medal of the MES RK. Author and co-author of more than 50 papers in radiobiology and radioecology, including ~20 publications with scientists from the UK, Spain, Russia, Italy, Hungary, Japan and Kazakhstan.",
+    publications: [
+      "Alikhan Bokeikhan University — заведующий кафедрой.",
+      "Участник проектов Европейского Радиоэкологического Альянса, Европейской Комиссии, МНТЦ, MEXT Японии.",
+      "Автор и соавтор более 50 научных работ в области радиобиологии и радиоэкологии.",
+    ],
+    publications_kz: [
+      "Alikhan Bokeikhan University — кафедра меңгерушісі.",
+      "Еуропалық Радиоэкологиялық Альянс, Еуропалық Комиссия, ХҒТОД, Жапония MEXT жобаларының қатысушысы.",
+      "Радиобиология және радиоэкология саласында 50-ден астам ғылыми жұмыстың авторы және соавторы.",
+    ],
+    publications_en: [
+      "Alikhan Bokeikhan University — Head of Department.",
+      "Participant in projects of the European Radioecological Alliance, European Commission, ISTC, MEXT Japan.",
+      "Author and co-author of more than 50 scientific works in radiobiology and radioecology.",
+    ],
+  },
+  {
+    id: 2,
+    name: "Мухамедияров Нурлан Жумагазыевич",
+    degree: "Магистр химии",
+    degree_kz: "Химия магистрі",
+    degree_en: "Master of Chemistry",
+    role: "Научный сотрудник",
+    role_kz: "Ғылыми қызметкер",
+    role_en: "Research Scientist",
+    avatar: "/team/member3.png",
+    bio: "Мухамедияров Н.Ж. обладает 15-летним опытом в сфере исследования миграции тяжёлых металлов и радионуклидов в основных компонентах экосистемы СИП. Руководил лабораторией элементного анализа, где проводились исследования с использованием методов масс- и атомно-эмиссионной спектрометрии с индуктивно связанной плазмой. Прошёл обучение и стажировки в рамках программ МАГАТЭ (Юлих, Германия) и ЦИПК «РОСАТОМ».",
+    bio_kz: "Мухамедияров Н.Ж. СЯП экожүйесінің негізгі компоненттеріндегі ауыр металдар мен радионуклидтердің миграциясын зерттеу саласында 15 жылдық тәжірибеге ие. Индуктивті байланысқан плазмамен масс- және атомдық-эмиссиялық спектрометрия әдістерін қолданатын элементтік анализ зертханасын басқарды. МАГАТЭ бағдарламасы (Юлих, Германия) және ЦИПК «РОСАТОМ» шеңберінде оқу мен тағылымдамадан өтті.",
+    responsibility: "Обеспечение надлежащего контроля за качеством измерений, оформление отчётной документации и написание научных статей.",
+    responsibility_kz: "Өлшем сапасын тиісті бақылауды қамтамасыз ету, есептеме құжаттамасын ресімдеу және ғылыми мақалалар жазу.",
+    responsibility_en: "Ensuring proper quality control of measurements, preparation of reporting documentation and writing scientific articles.",
+    bio_en: "N.Zh. Mukhamediyarov has 15 years of experience in studying the migration of heavy metals and radionuclides in the main components of the SNTS ecosystem. He managed an elemental analysis laboratory using ICP mass spectrometry and atomic emission spectrometry methods. He has completed training and internships under IAEA programmes (Jülich, Germany) and ROSATOM CIPK.",
+    publications: [
+      "НАО «Университет имени Шакарима города Семей» — научный сотрудник.",
+      "Автор более 20 научных статей по миграции радионуклидов и тяжёлых металлов в экосистеме СИП.",
+      "Стажировки по программам МАГАТЭ (Юлих, Германия) и ЦИПК «РОСАТОМ».",
+    ],
+    publications_kz: [
+      "НАО «Семей қаласының Шәкәрім атындағы университеті» — ғылыми қызметкер.",
+      "СЯП экожүйесіндегі радионуклидтер мен ауыр металдардың миграциясы бойынша 20-дан астам ғылыми мақаланың авторы.",
+      "МАГАТЭ (Юлих, Германия) және ЦИПК «РОСАТОМ» бағдарламалары бойынша тағылымдама.",
+    ],
+    publications_en: [
+      "NJSC «Shakarim University of Semey» — Research Scientist.",
+      "Author of more than 20 scientific papers on radionuclide and heavy metal migration in the SNTS ecosystem.",
+      "Internships under IAEA programmes (Jülich, Germany) and ROSATOM CIPK.",
+    ],
+  },
+  {
+    id: 4,
+    name: "Актаев Медет Рыскалиевич",
+    degree: "PhD-докторант",
+    degree_kz: "PhD докторанты",
+    degree_en: "PhD Candidate",
+    role: "Исполнитель",
+    role_kz: "Орындаушы",
+    role_en: "Researcher",
+    avatar: "/team/member7.png",
+    bio: "Актаев М.Р. обладает 15-летним стажем в области мониторинга радиационного загрязнения окружающей среды и является докторантом PhD. Его научная работа фокусируется на исследовании экологических характеристик поверхностных и подземных вод, выявлении источников загрязнения и механизмов миграции загрязняющих веществ в водной среде. Являлся ответственным исполнителем НИР «Оценка экологического состояния реки Иртыш» (МОН РК). Прошёл обучение на курсах и вебинарах МАГАТЭ.",
+    bio_kz: "Актаев М.Р. қоршаған ортаның радиациялық ластануын бақылау саласында 15 жылдық өтілі бар және PhD докторанты болып табылады. Оның ғылыми жұмысы беткі және жерасты сулардың экологиялық сипаттамаларын зерттеуге бағытталған. «Ертіс өзенінің экологиялық жағдайын бағалау» (ҚР БҒМ) ҒЗЖ-нің жауапты орындаушысы болды. МАГАТЭ курстары мен вебинарларынан өтті.",
+    responsibility: "Организация полевых работ по изучению гидрологического режима малых рек и отбору проб воды и растений для определения концентрации загрязняющих веществ. Подготовка отчётных материалов и публикаций.",
+    responsibility_kz: "Шағын өзендердің гидрологиялық режимін зерттеу және ластаушы заттардың концентрациясын анықтауға арналған су мен өсімдік үлгілерін іріктеу бойынша далалық жұмыстарды ұйымдастыру. Есептемелік материалдар мен жарияланымдарды дайындау.",
+    responsibility_en: "Organising field work on studying the hydrological regime of small rivers and sampling water and vegetation to determine contaminant concentrations. Preparation of reports and publications.",
+    bio_en: "M.R. Aktayev has 15 years of experience in environmental radiation contamination monitoring and is a PhD candidate. His research focuses on ecological characteristics of surface and groundwater, identifying contamination sources and migration mechanisms. He was the responsible executor of the MES RK R&D project «Assessment of the Ecological State of the Irtysh River» and has completed IAEA training courses and webinars.",
+    publications: [
+      "Евразийский национальный университет им. Л.Н. Гумилёва — PhD-докторант кафедры управления и инжиниринга в сфере охраны окружающей среды.",
+      "Ответственный исполнитель НИР МОН РК «Оценка экологического состояния реки Иртыш».",
+      "Участник обучающих курсов и вебинаров МАГАТЭ.",
+    ],
+    publications_kz: [
+      "Л.Н. Гумилев атындағы Еуразия ұлттық университеті — қоршаған ортаны қорғау саласындағы басқару және инжиниринг кафедрасының PhD докторанты.",
+      "ҚР БҒМ «Ертіс өзенінің экологиялық жағдайын бағалау» ҒЗЖ-нің жауапты орындаушысы.",
+      "МАГАТЭ оқу курстары мен вебинарларының қатысушысы.",
+    ],
+    publications_en: [
+      "L.N. Gumilyov Eurasian National University — PhD candidate, Dept. of Environmental Management and Engineering.",
+      "Responsible executor of MES RK R&D project «Assessment of the Ecological State of the Irtysh River».",
+      "Participant of IAEA training courses and webinars.",
+    ],
+  },
+  {
+    id: 5,
+    name: "Мухамедиярова Алмагуль Айдомбековна",
+    degree: "Бакалавр химии",
+    degree_kz: "Химия бакалавры",
+    degree_en: "Bachelor of Chemistry",
+    role: "Исполнитель",
+    role_kz: "Орындаушы",
+    role_en: "Researcher",
+    avatar: "/team/member5.png",
+    bio: "Мухамедиярова А.А. обладает 10-летним опытом в области аналитической химии, специализируется на подготовке проб окружающей среды к элементному и радионуклидному анализу.",
+    bio_kz: "Мухамедиярова А.А. аналитикалық химия саласында 10 жылдық тәжірибеге ие, элементтік және радионуклидтік талдауға арналған қоршаған орта үлгілерін дайындауға маманданған.",
+    responsibility: "Организация и проведение лабораторных исследований, подготовка проб воды, растений, воздуха и продукции животноводства для спектрометрических анализов. Осуществление контроля качества измерений.",
+    responsibility_kz: "Зертханалық зерттеулерді ұйымдастыру және жүргізу, спектрометриялық талдауға арналған су, өсімдіктер, ауа және мал шаруашылығы өнімдері үлгілерін дайындау. Өлшем сапасын бақылауды жүзеге асыру.",
+    responsibility_en: "Organising and conducting laboratory research, preparing water, plant, air and livestock product samples for spectrometric analyses. Implementing measurement quality control.",
+    bio_en: "A.A. Mukhamediyarova has 10 years of experience in analytical chemistry, specialising in preparation of environmental samples for elemental and radionuclide analysis.",
+    publications: ["Alikhan Bokeikhan University — научный сотрудник."],
+    publications_kz: ["Alikhan Bokeikhan University — ғылыми қызметкер."],
+    publications_en: ["Alikhan Bokeikhan University — Research Scientist."],
+  },
+  {
+    id: 6,
+    name: "Темиржанова Арай Ермековна",
+    degree: "Магистр экологии",
+    degree_kz: "Экология магистрі",
+    degree_en: "Master of Ecology",
+    role: "Исполнитель",
+    role_kz: "Орындаушы",
+    role_en: "Researcher",
+    avatar: "/team/member9.png",
+    bio: "Темиржанова А.Е. обладает 14-летним стажем в исследовании миграции тяжёлых металлов и радионуклидов в окружающей среде. Специализируется на анализе проб с применением методов масс-спектрометрии и атомно-эмиссионной спектрометрии с ИСП. Автор и соавтор более 10 научных статей. Исполнитель проектов МОН РК 5032/ГФ4, МНТЦ К-2160 и К-2161.",
+    bio_kz: "Темиржанова А.Е. қоршаған ортадағы ауыр металдар мен радионуклидтердің миграциясын зерттеуде 14 жылдық өтілі бар. ИСП-бар масс-спектрометрия және атомдық-эмиссиялық спектрометрия әдістерін қолданатын үлгілер талдауына маманданған. 10-нан астам ғылыми мақаланың авторы және соавторы.",
+    responsibility: "Организация выездных работ по изучению перемещения трития в воде реки Шаган, атмосферном воздухе, продукции растениеводства и животноводства. Подготовка отчётной документации и материалов для публикаций.",
+    responsibility_kz: "Шаған өзені суындағы, атмосфералық ауадағы, өсімдік шаруашылығы және мал шаруашылығы өнімдеріндегі тритийдің ауысуын зерттеу бойынша далалық жұмыстарды ұйымдастыру. Есептемелік құжаттамаларды дайындау.",
+    responsibility_en: "Organising field work to study the movement of tritium in Shagan River water, atmospheric air, and agricultural products. Preparation of reporting documentation and publication materials.",
+    bio_en: "A.E. Temirzhanova has 14 years of experience in studying heavy metal and radionuclide migration in the environment. She specialises in sample analysis using ICP mass spectrometry and atomic emission spectrometry. Author and co-author of more than 10 scientific papers. Executor of MES RK projects 5032/GF4 and ISTC K-2160 and K-2161.",
+    publications: [
+      "НАО «Университет имени Шакарима города Семей» — научный сотрудник.",
+      "Исполнитель проектов МОН РК 5032/ГФ4 и МНТЦ К-2160, К-2161.",
+      "Автор и соавтор более 10 научных статей по элементному и радионуклидному анализу.",
+    ],
+    publications_kz: [
+      "НАО «Семей қаласының Шәкәрім атындағы университеті» — ғылыми қызметкер.",
+      "ҚР БҒМ 5032/ГФ4 және ХҒТОД К-2160, К-2161 жобаларының орындаушысы.",
+      "Элементтік және радионуклидтік талдау бойынша 10-нан астам ғылыми мақаланың авторы және соавторы.",
+    ],
+    publications_en: [
+      "NJSC «Shakarim University of Semey» — Research Scientist.",
+      "Executor of MES RK projects 5032/GF4 and ISTC K-2160, K-2161.",
+      "Author and co-author of more than 10 scientific papers on elemental and radionuclide analysis.",
+    ],
+  },
+  {
+    id: 7,
+    name: "Hegedűs Miklós (Хегедюш Миклош)",
+    degree: "PhD — биол., экологическая и хим. инженерия",
+    degree_kz: "PhD — биол., экологиялық және хим. инженерия",
+    degree_en: "PhD — Biol., Environ. & Chem. Engineering",
+    role: "Научный консультант",
+    role_kz: "Ғылыми кеңесші",
+    role_en: "Scientific Consultant",
+    avatar: "/team/member8.png",
+    bio: "Hegedűs Miklós обладает 15-летним опытом работы в области радиоэкологии и радиационной безопасности. Его экспертиза включает гамма-спектрометрию, исследование радона и тория, анализ радионуклидов, изучение радиоактивности окружающей среды, радиационную защиту и обнаружение радиации. Имеет более 30 публикаций в высокорейтинговых журналах и индекс Хирша = 8.",
+    bio_kz: "Hegedűs Miklós радиоэкология және радиациялық қауіпсіздік саласында 15 жылдық тәжірибеге ие. Оның сараптамасына гамма-спектрометрия, радон мен торий зерттеулері, радионуклидтер талдауы кіреді. Жоғары рейтингті журналдарда 30-дан астам жарияланымы және Хирш индексі = 8 бар.",
+    responsibility: "Научный консультант, методическое обеспечение аналитических исследований. Обеспечение высокого качества анализа текущего радиоэкологического состояния окружающей среды в зоне воздействия реки Шаган, разработка рекомендаций по смягчению последствий.",
+    responsibility_kz: "Ғылыми кеңесші, аналитикалық зерттеулерді әдістемелік қамтамасыз ету. Шаған өзенінің ықпал аймағындағы қоршаған ортаның ағымдағы радиоэкологиялық жағдайын талдаудың жоғары сапасын қамтамасыз ету.",
+    responsibility_en: "Scientific consultant, methodological support of analytical research. Ensuring high-quality analysis of the current radioecological state of the environment in the Shagan River influence zone, developing mitigation recommendations.",
+    bio_en: "Miklós Hegedűs has 15 years of experience in radioecology and radiation safety. His expertise includes gamma spectrometry, radon and thorium research, radionuclide analysis, environmental radioactivity, radiation protection and detection. He has more than 30 publications in high-impact journals and an h-index of 8.",
+    publications: [
+      "Более 30 публикаций в высокорейтинговых международных журналах.",
+      "Индекс Хирша: 8.",
+      "Экспертиза: гамма-спектрометрия, анализ радона и тория, радиационная защита.",
+    ],
+    publications_kz: [
+      "Жоғары рейтингті халықаралық журналдарда 30-дан астам жарияланым.",
+      "Хирш индексі: 8.",
+      "Сараптама: гамма-спектрометрия, радон мен торий талдауы, радиациялық қорғаныс.",
+    ],
+    publications_en: [
+      "More than 30 publications in high-impact international journals.",
+      "h-index: 8.",
+      "Expertise: gamma spectrometry, radon and thorium analysis, radiation protection.",
+    ],
+  },
+  {
+    id: 8,
+    name: "Федунова Екатерина Валерьевна",
+    degree: "Бакалавр",
+    degree_kz: "Бакалавр",
+    degree_en: "Bachelor",
+    role: "Лаборант-исследователь",
+    role_kz: "Зертхана зерттеушісі",
+    role_en: "Research Laboratory Assistant",
+    avatar: "/team/member1.png",
+    bio: "Лаборант-исследователь НИЦ «Курчатовский институт» — ВНИИРАЭ. Специализируется на отборе проб растительности и пробоподготовке для определения трития.",
+    bio_kz: "ҒЗО «Курчатов институты» — ВНИИРАЭ зертхана зерттеушісі. Тритийді анықтауға арналған өсімдік үлгілерін іріктеу мен үлгілерді дайындауға маманданған.",
+    responsibility: "Отбор проб растительности, проведение работ по пробоподготовке и определению трития в полученных пробах.",
+    responsibility_kz: "Өсімдік үлгілерін іріктеу, алынған үлгілерде тритийді дайындау және анықтау жұмыстарын жүргізу.",
+    responsibility_en: "Vegetation sampling, sample preparation and tritium determination in collected samples.",
+    bio_en: "Research laboratory assistant at NRC «Kurchatov Institute» — ARRIRAE. Specialises in vegetation sampling and sample preparation for tritium determination.",
+    publications: [
+      "НИЦ «Курчатовский институт» — ВНИИРАЭ, лаборант-исследователь.",
+      "Researcher ID: ODN-0546-2025.",
+      "ORCID: 0009-0001-9792-1425.",
+    ],
+    publications_kz: [
+      "ҒЗО «Курчатов институты» — ВНИИРАЭ, зертхана зерттеушісі.",
+      "Researcher ID: ODN-0546-2025.",
+      "ORCID: 0009-0001-9792-1425.",
+    ],
+    publications_en: [
+      "NRC «Kurchatov Institute» — ARRIRAE, Research Laboratory Assistant.",
+      "Researcher ID: ODN-0546-2025.",
+      "ORCID: 0009-0001-9792-1425.",
+    ],
+  },
+  {
+    id: 9,
+    name: "Михайлов Андрей Вячеславович",
+    degree: "Аспирант",
+    degree_kz: "Аспирант",
+    degree_en: "Postgraduate (PhD Student)",
+    role: "Младший научный сотрудник",
+    role_kz: "Кіші ғылыми қызметкер",
+    role_en: "Junior Research Scientist",
+    avatar: "/team/member6.png",
+    bio: "Аспирант очной формы обучения. Тема диссертационной работы: «Исследование распределения трития в растительном покрове, произрастающей на территории с подземным источником трития». Младший научный сотрудник НИЦ «Курчатовский институт» — ВНИИРАЭ.",
+    bio_kz: "Күндізгі оқу нысанының аспиранты. Диссертациялық жұмыстың тақырыбы: «Тритийдің жерасты көзі бар аумақта өсетін өсімдік жамылғысында тритийдің таралуын зерттеу». ҒЗО «Курчатов институты» — ВНИИРАЭ кіші ғылыми қызметкері.",
+    responsibility: "Проведение круглосуточного отбора проб растительности, почвы, воды, проб водяных паров воздуха в полевых условиях. Подготовка отчётности.",
+    responsibility_kz: "Далалық жағдайда өсімдіктер, топырақ, су, ауа буы үлгілерін тәулік бойы іріктеуді жүргізу. Есептемелерді дайындау.",
+    responsibility_en: "Round-the-clock field sampling of vegetation, soil, water and atmospheric water vapour. Preparation of reports.",
+    bio_en: "Full-time postgraduate student. Dissertation topic: «Study of tritium distribution in vegetation cover growing on a territory with an underground tritium source». Junior Research Scientist at NRC «Kurchatov Institute» — ARRIRAE.",
+    publications: [
+      "НИЦ «Курчатовский институт» — ВНИИРАЭ, младший научный сотрудник.",
+      "Индекс Хирша: 1 · ORCID: 0009-0005-5859-6606.",
+      "ResearcherID: 83832 · Scopus Author ID: 58749536000.",
+    ],
+    publications_kz: [
+      "ҒЗО «Курчатов институты» — ВНИИРАЭ, кіші ғылыми қызметкер.",
+      "Хирш индексі: 1 · ORCID: 0009-0005-5859-6606.",
+      "ResearcherID: 83832 · Scopus Author ID: 58749536000.",
+    ],
+    publications_en: [
+      "NRC «Kurchatov Institute» — ARRIRAE, Junior Research Scientist.",
+      "h-index: 1 · ORCID: 0009-0005-5859-6606.",
+      "ResearcherID: 83832 · Scopus Author ID: 58749536000.",
+    ],
+  },
+];
