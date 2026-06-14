@@ -12,7 +12,6 @@ export default function About() {
     { id: "actuality", labelKey: "about_s1" as const },
     { id: "goals", labelKey: "about_s2" as const },
     { id: "methodology", labelKey: "about_s3" as const },
-    { id: "expected", labelKey: "about_s4" as const },
   ];
 
   const lang = useLang().lang;
@@ -187,21 +186,54 @@ export default function About() {
               <h3 className="text-[#0F2C59] font-bold text-xl mb-4 pb-3 border-b border-[#E2EAF4]">
                 {t("about_s2_heading")}
               </h3>
-              <div className="space-y-4 text-[#1E3E62]">
-                <p className="font-semibold text-[#0F2C59]">{t("about_s2_goal_label")}</p>
-                <p className="leading-relaxed">{t("about_s2_goal")}</p>
+              <div className="space-y-6 text-[#1E3E62]">
+                <div>
+                  <p className="font-semibold text-[#0F2C59] mb-2">{t("about_s2_main_goal_label")}</p>
+                  <p className="text-sm leading-relaxed">{t("about_s2_main_goal")}</p>
+                </div>
 
-                <p className="font-semibold text-[#0F2C59] mt-6">{t("about_s2_tasks_label")}</p>
-                <ol className="list-none flex flex-col gap-3">
-                  {ta("about_s2_tasks").map((task, idx) => (
-                    <li key={idx} className="flex gap-3 text-sm leading-relaxed group/task">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#4A90E2] group-hover/task:bg-[#63B3ED] group-hover/task:shadow-[0_0_12px_rgba(99,179,237,0.8)] text-white text-xs font-bold flex items-center justify-center mt-0.5 transition-all duration-200 cursor-default">
-                        {idx + 1}
-                      </span>
-                      <span className="group-hover/task:text-[#0F2C59] transition-colors duration-200">{task}</span>
-                    </li>
-                  ))}
-                </ol>
+                <div>
+                  <p className="font-semibold text-[#0F2C59] mb-3">{t("about_s2_strategic_label")}</p>
+                  <ol className="list-none flex flex-col gap-3">
+                    {ta("about_s2_strategic").map((item, idx) => {
+                      const separator = " — ";
+                      const splitIndex = item.indexOf(separator);
+                      const title = splitIndex >= 0 ? item.slice(0, splitIndex) : item;
+                      const description = splitIndex >= 0 ? item.slice(splitIndex + separator.length) : "";
+
+                      return (
+                        <li key={idx} className="flex gap-3 text-sm leading-relaxed group/task">
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#4A90E2] group-hover/task:bg-[#63B3ED] group-hover/task:shadow-[0_0_12px_rgba(99,179,237,0.8)] text-white text-xs font-bold flex items-center justify-center mt-0.5 transition-all duration-200 cursor-default">
+                            {idx + 1}
+                          </span>
+                          <span className="group-hover/task:text-[#0F2C59] transition-colors duration-200">
+                            <span className="font-semibold text-[#0F2C59]">{title}</span>
+                            {description && (
+                              <>
+                                {" "}
+                                {description}
+                              </>
+                            )}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+
+                <div>
+                  <p className="font-semibold text-[#0F2C59] mb-3">{t("about_s2_specific_label")}</p>
+                  <ol className="list-none flex flex-col gap-3">
+                    {ta("about_s2_specific").map((task, idx) => (
+                      <li key={idx} className="flex gap-3 text-sm leading-relaxed group/task">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#4A90E2] group-hover/task:bg-[#63B3ED] group-hover/task:shadow-[0_0_12px_rgba(99,179,237,0.8)] text-white text-xs font-bold flex items-center justify-center mt-0.5 transition-all duration-200 cursor-default">
+                          {idx + 1}
+                        </span>
+                        <span className="group-hover/task:text-[#0F2C59] transition-colors duration-200">{task}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               </div>
             </div>
 
@@ -235,34 +267,6 @@ export default function About() {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-
-            {/* Ожидаемые результаты */}
-            <div id="about-expected" className="scroll-mt-24">
-              <h3 className="text-[#0F2C59] font-bold text-xl mb-4 pb-3 border-b border-[#E2EAF4]">
-                {t("about_s4_heading")}
-              </h3>
-              <div className="space-y-4 text-[#1E3E62] text-sm leading-relaxed">
-                <p className="font-semibold text-[#0F2C59] text-base">{t("about_s4_pub_label")}</p>
-                <ul className="flex flex-col gap-2">
-                  {ta("about_s4_pubs").map((item, i) => (
-                    <li key={i} className="flex gap-2 items-start">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4A90E2] flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="font-semibold text-[#0F2C59] text-base mt-6">{t("about_s4_pract_label")}</p>
-                <ul className="flex flex-col gap-2">
-                  {ta("about_s4_practs").map((item, i) => (
-                    <li key={i} className="flex gap-2 items-start">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4A90E2] flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
 

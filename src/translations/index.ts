@@ -16,9 +16,9 @@ export const translations = {
     // Hero
     hero_badge: "Научный проект АР22783154 · КН МОН РК",
     hero_title: "Радиоэкологическая обсерватория",
-    hero_subtitle: "бассейна реки Шаган",
+    hero_subtitle: "Шаган",
     hero_desc:
-      "Комплексный мониторинг тритиевого загрязнения, оценка дозовых нагрузок и разработка рекомендаций для населённых пунктов в зоне влияния Семипалатинского испытательного полигона.",
+      "Современная международная научная инфраструктура для проведения комплексного радиоэкологического мониторинга, исследований в области радиационной безопасности, мониторинга подземных вод, миграции радионуклидов и долгосрочного экологического наблюдения за территориями, подвергшимися воздействию ядерных испытаний.",
     hero_cta_program: "О программе исследований",
     hero_cta_gallery: "Посмотреть галерею",
 
@@ -27,7 +27,7 @@ export const translations = {
     program_heading: "Радиоэкологический мониторинг бассейна реки Шаган",
     program_heading2: "в зоне влияния Семипалатинского испытательного полигона",
     program_p1:
-      "Программа реализуется в рамках гранта Комитета науки МОН РК (проект № АР22783154). Объектом исследования является бассейн реки Шаган — основного водного артерии юго-западной буферной зоны Семипалатинского испытательного полигона (СИП).",
+      "Программа реализуется в рамках гранта Комитета науки МНВО РК «Комплексное радиоэкологическое исследование бассейна р. Шаган и разработка рекомендаций по минимизации негативного влияния на окружающую среду и население» (№ АР22783154).",
     program_p2:
       "Ключевым загрязнителем является тритий (³H) — радиоактивный изотоп водорода с периодом полураспада T₁/₂ = 12,32 года. Проникая в гидросферу в результате подземных ядерных испытаний, тритий мигрирует в поверхностные воды и вовлекается в биологический цикл, создавая хроническую дозовую нагрузку на население.",
     program_feat1_title: "Тритиевый мониторинг",
@@ -46,7 +46,7 @@ export const translations = {
     program_stat1_label: "точек мониторинга",
     program_stat2_val: "3",
     program_stat2_label: "года исследований",
-    program_stat3_val: "500+",
+    program_stat3_val: "+1500",
     program_stat3_label: "проб проанализировано",
     program_img_caption: "Полевые измерения на точке мониторинга № 7",
     program_img_sub: "Нижнее течение р. Шаган · Апрель 2025",
@@ -78,7 +78,6 @@ export const translations = {
     about_s1: "Актуальность",
     about_s2: "Цели и задачи",
     about_s3: "Методология",
-    about_s4: "Ожидаемые результаты",
     about_s5: "Документы",
 
     about_s1_heading: "Актуальность исследования",
@@ -90,21 +89,32 @@ export const translations = {
     about_s1_box:
       "Тритий является химическим аналогом водорода и легко включается в молекулы воды (HTO), что делает его биологически доступным. Попадая в организм с питьевой водой или продуктами питания, тритий равномерно распределяется по всем тканям и создаёт дополнительную внутреннюю дозу облучения.",
     about_s1_p3:
-      "Населённые пункты Абай, Долонь и Малеевка, расположенные в 50–120 км от границы СИП, используют р. Шаган и связанные с ней грунтовые воды как источник питьевого водоснабжения.",
+      "Жители населённых пунктов, расположенных в данном районе, используют воду реки Шаган для сельскохозяйственных нужд, а воду из скважин для питья.",
 
-    about_s2_heading: "Цели и задачи",
-    about_s2_goal_label: "Цель проекта:",
-    about_s2_goal:
-      "Разработка комплексной системы радиоэкологического мониторинга бассейна реки Шаган и научно обоснованной оценки дозовых нагрузок на население прилегающих территорий.",
-    about_s2_tasks_label: "Задачи исследования:",
-    about_s2_tasks: [
-      "Создание сети из 14 стационарных пунктов мониторинга поверхностных и подземных вод с GPS-привязкой и картографированием в ГИС.",
-      "Систематический (ежеквартальный) отбор и анализ проб воды, донных отложений и прибрежных почв на содержание трития методом ЖСС.",
-      "Выявление основных путей и скоростей миграции трития от источников загрязнения к поверхностным водотокам.",
-      "Построение гидрогеохимических моделей распространения загрязнения с использованием программ FEFLOW и MODFLOW.",
-      "Расчёт эффективных доз облучения населения по четырём путям поступления: питьевая вода, рыба, молоко, прямое воздействие.",
-      "Сравнительный анализ полученных доз с нормативами ICRP-60 и казахстанскими НРБ-2014.",
-      "Разработка рекомендаций по оптимизации систем водоснабжения и снижению дозовых нагрузок для органов государственного управления.",
+    about_s2_heading:
+      "Цели и задачи Международной радиоэкологической и исследовательской обсерватории «Шаган»",
+    about_s2_main_goal_label: "Основная цель",
+    about_s2_main_goal:
+      "Создание уникальной международной научной инфраструктуры на территории бывшего Семипалатинского испытательного полигона для проведения комплексного радиоэкологического мониторинга, исследований в области радиационной безопасности, долгосрочного экологического наблюдения и формирования научно-образовательного и туристического объекта международного значения.",
+    about_s2_strategic_label: "Стратегические цели",
+    about_s2_strategic: [
+      "Формирование международного центра компетенций — Создать первый в Центральной Азии международный центр экспертизы в области радиоэкологии, радиационной безопасности, сельского хозяйства и экологического мониторинга.",
+      "Обеспечение радиационной и экологической безопасности — Разработать современную систему долгосрочного мониторинга радиационной обстановки, миграции радионуклидов, подземных вод и воздействия на окружающую среду для защиты населения и обоснования управленческих решений.",
+      "Научно-технологическое и социально-экономическое развитие региона — Стимулировать развитие научного потенциала Абайской области, укрепление материально-технической базы научных и образовательных организаций, подготовку кадров нового поколения и привлечение инвестиций и грантов.",
+      "Сохранение исторической памяти и развитие туризма — Создать музейно-образовательный комплекс, посвящённый истории Семипалатинского полигона, атомной науки, антиядерному движению и вкладу Казахстана в глобальное ядерное разоружение, для развития научного, образовательного и историко-познавательного туризма.",
+      "Международное сотрудничество — Укрепить партнёрство с МАГАТЭ и другими международными организациями, повысить узнаваемость Казахстана и Абайской области как ведущего центра ядерной и радиационной безопасности.",
+    ],
+    about_s2_specific_label: "Конкретные задачи",
+    about_s2_specific: [
+      "Организация комплексного радиоэкологического мониторинга на территории бывшего полигона, включая мониторинг подземных вод, миграции радионуклидов, трития и других загрязнителей.",
+      "Проведение исследований в области радиационной безопасности, оценки дозовых нагрузок и разработки рекомендаций для безопасного использования территорий.",
+      "Реализация программ МАГАТЭ (в частности, «Atoms4Food») по внедрению передовых технологий в сельском хозяйстве: повышение урожайности, эффективное использование водных ресурсов, улучшение почв и развитие животноводства.",
+      "Создание и оснащение полевой экспедиционной базы, приобретение современного научного и мониторингового оборудования, модульных сооружений для исследователей.",
+      "Формирование достоверной научной базы для оценки и вовлечения безопасных территорий полигона в хозяйственный оборот.",
+      "Развитие музейно-образовательного комплекса как центра просвещения, проведения международных конференций, научных экспедиций и образовательных программ.",
+      "Привлечение республиканских и международных инвестиций, грантовых средств и проектов технического сотрудничества.",
+      "Подготовка высококвалифицированных кадров, укрепление сотрудничества с университетами и научными организациями Абайской области.",
+      "Повышение международной узнаваемости проекта и продвижение результатов исследований на глобальном уровне.",
     ],
 
     about_s3_heading: "Методология",
@@ -123,23 +133,6 @@ export const translations = {
       "ГИС-картирование (QGIS, ArcGIS Pro)",
       "Статистический анализ временных рядов (R, Python)",
       "Дозиметрическое моделирование по методологии IAEA",
-    ],
-
-    about_s4_heading: "Ожидаемые результаты",
-    about_s4_pub_label: "Публикационный план:",
-    about_s4_pubs: [
-      "Не менее 6 статей в рецензируемых журналах Q1–Q2 базы Scopus / Web of Science",
-      "1 монография «Радиоэкология бассейна реки Шаган» (издательство НАН РК)",
-      "3 научных доклада на международных конференциях (IAEA, IRPA, EGU)",
-      "1 учебно-методическое пособие для студентов экологических специальностей",
-    ],
-    about_s4_pract_label: "Практические результаты:",
-    about_s4_practs: [
-      "Интерактивная ГИС-система радиоэкологического мониторинга бассейна р. Шаган",
-      "База данных радиационного мониторинга (>3 лет непрерывных наблюдений)",
-      "Карты изолиний тритиевого загрязнения в масштабе 1:50 000",
-      "Аналитические доклады и рекомендации для МЭПР РК, ДЧС ВКО",
-      "Подготовка 2 кандидатов и 1 доктора наук в области радиационной экологии",
     ],
 
     // Footer
@@ -172,10 +165,10 @@ export const translations = {
 
     // Hero
     hero_badge: "Ғылыми жоба АР22783154 · ҚР БҒМ ҒК",
-    hero_title: "Шаған өзені бассейнінің",
-    hero_subtitle: "радиоэкологиялық обсерваториясы",
+    hero_title: "Радиоэкологиялық обсерватория",
+    hero_subtitle: "Шаған",
     hero_desc:
-      "Тритий ластануын кешенді бақылау, доза жүктемесін бағалау және Семей ядролық сынақ полигонының ықпал аймағындағы елді мекендерге ұсынымдар әзірлеу.",
+      "Заманауи халықаралық ғылыми инфрақұрылым — кешенді радиоэкологиялық мониторинг жүргізуге, радиациялық қауіпсіздік саласындағы зерттеулерге, жерасты суларын бақылауға, радионуклидтердің миграциясын зерттеуге және ядролық сынақтар әсеріне ұшыраған аумақтарды ұзақ мерзімді экологиялық бақылауға арналған.",
     hero_cta_program: "Зерттеу бағдарламасы туралы",
     hero_cta_gallery: "Галереяны қарау",
 
@@ -184,7 +177,7 @@ export const translations = {
     program_heading: "Шаған өзені бассейнінің радиоэкологиялық мониторингі",
     program_heading2: "Семей ядролық сынақ полигонының ықпал аймағында",
     program_p1:
-      "Бағдарлама ҚР БҒМ Ғылым комитетінің гранты шеңберінде жүзеге асырылады (жоба № АР22783154). Зерттеу объектісі — Семей ядролық сынақ полигонының (СЯП) оңтүстік-батыс буферлік аймағының негізгі су артериясы болып табылатын Шаған өзені бассейні.",
+      "Бағдарлама ҚР Білім және ғылым министрлігінің Ғылым комитетінің гранты шеңберінде жүзеге асырылады — «Шаған өзені бассейнінің кешенді радиоэкологиялық зерттеуі және қоршаған орта мен халыққа теріс әсерді барынша азайту бойынша ұсынымдар әзірлеу» (№ АР22783154).",
     program_p2:
       "Негізгі ластаушы — жартылай ыдырау кезеңі T₁/₂ = 12,32 жыл болатын радиоактивті сутегі изотопы тритий (³H). Жерасты ядролық жарылыстар нәтижесінде гидросфераға енген тритий беткі суларға миграцияланады және биологиялық айналымға тартылады.",
     program_feat1_title: "Тритийлік мониторинг",
@@ -203,7 +196,7 @@ export const translations = {
     program_stat1_label: "бақылау нүктесі",
     program_stat2_val: "3",
     program_stat2_label: "жылдық зерттеу",
-    program_stat3_val: "500+",
+    program_stat3_val: "+1500",
     program_stat3_label: "үлгі талданды",
     program_img_caption: "№ 7 бақылау нүктесінде далалық өлшеулер",
     program_img_sub: "Шаған өзенінің төменгі ағысы · 2025 жылғы сәуір",
@@ -235,7 +228,6 @@ export const translations = {
     about_s1: "Өзектілігі",
     about_s2: "Мақсаттары мен міндеттері",
     about_s3: "Әдіснама",
-    about_s4: "Күтілетін нәтижелер",
     about_s5: "Құжаттар",
 
     about_s1_heading: "Зерттеудің өзектілігі",
@@ -247,21 +239,32 @@ export const translations = {
     about_s1_box:
       "Тритий сутегінің химиялық аналогы болып табылады және су молекулаларына (HTO) оңай қосылады, бұл оны биологиялық қолжетімді етеді. Ауыз су немесе тамақ өнімдерімен бірге ағзаға түскен тритий барлық тіндерге біркелкі таралады және қосымша ішкі сәулелену дозасын тудырады.",
     about_s1_p3:
-      "СЯП шекарасынан 50–120 км қашықтықта орналасқан Абай, Долон және Малеевка елді мекендері ауыз су көзі ретінде Шаған өзені мен онымен байланысты жерасты суларын пайдаланады.",
+      "Осы аймақта орналасқан елді мекендер тұрғындары Шаған өзенінің суларын ауыл шаруашылығы мақсатында, ал құбыр суларын ішуге пайдаланады.",
 
-    about_s2_heading: "Мақсаттары мен міндеттері",
-    about_s2_goal_label: "Жобаның мақсаты:",
-    about_s2_goal:
-      "Шаған өзені бассейнінің кешенді радиоэкологиялық мониторинг жүйесін және іргелес аумақтар халқына доза жүктемесін ғылыми негізді бағалауды әзірлеу.",
-    about_s2_tasks_label: "Зерттеу міндеттері:",
-    about_s2_tasks: [
-      "GPS-байластырумен және ГАЖ-картографиялаумен беткі және жерасты суларының 14 стационарлық бақылау нүктесінің желісін құру.",
-      "Беттің, шөгінді жыныстардың және жағалаудың тритий мөлшеріне жүйелі (тоқсандық) үлгілерін іріктеу және талдау.",
-      "Ластанудан беткі суларға тритий миграциясының негізгі жолдары мен жылдамдықтарын анықтау.",
-      "FEFLOW және MODFLOW бағдарламаларын қолдана отырып, ластану таралуының гидрогеохимиялық модельдерін құру.",
-      "Халықтың ауыз су, балық, сүт, тікелей ықпал арқылы алатын тиімді сәулелену дозаларын есептеу.",
-      "Алынған дозаларды ICRP-60 және ҚР НРБ-2014 нормативтерімен салыстырмалы талдау.",
-      "Мемлекеттік басқару органдары үшін су жабдықтау жүйелерін оңтайландыру бойынша ұсынымдар әзірлеу.",
+    about_s2_heading:
+      "«Шаған» халықаралық радиоэкологиялық және зерттеу обсерваториясының мақсаттары мен міндеттері",
+    about_s2_main_goal_label: "Негізгі мақсат",
+    about_s2_main_goal:
+      "Бұрынғы Семей ядролық сынақ полигоны аумағында бірегей халықаралық ғылыми инфрақұрылым құру — кешенді радиоэкологиялық мониторинг жүргізу, радиациялық қауіпсіздік саласындағы зерттеулер, ұзақ мерзімді экологиялық бақылау және халықаралық маңызы бар ғылыми-білім беру және туристік объект қалыптастыру үшін.",
+    about_s2_strategic_label: "Стратегиялық мақсаттар",
+    about_s2_strategic: [
+      "Халықаралық құзыреттілік орталығын қалыптастыру — Орталық Азияда радиоэкология, радиациялық қауіпсіздік, ауыл шаруашылығы және экологиялық мониторинг саласындағы алғашқы халықаралық сараптама орталығын құру.",
+      "Радиациялық және экологиялық қауіпсіздікті қамтамасыз ету — Халықты қорғау және басқарушылық шешімдерді негіздеу үшін радиациялық жағдайды, радионуклидтердің миграциясын, жерасты суларын және қоршаған ортаға әсерін ұзақ мерзімді бақылаудың заманауи жүйесін әзірлеу.",
+      "Аймақтың ғылыми-технологиялық және әлеуметтік-экономикалық дамуы — Абай облысының ғылыми әлеуетін дамыту, ғылыми және білім беру ұйымдарының материалдық-техникалық базасын нығайту, жаңа буын мамандарын даярлау және инвестициялар мен гранттар тарту.",
+      "Тарихи жадты сақтау және туризмді дамыту — Семей полигоны тарихына, атом ғылымына, ядролық қарсы қозғалысқа және Қазақстанның жаһандық ядролық қарусыздануға қосқан үлесіне арналған музейлік-білім беру кешенін құру.",
+      "Халықаралық ынтымақтастық — МАГАТЭ және басқа халықаралық ұйымдармен серіктестікті нығайту, Қазақстан мен Абай облысының ядролық және радиациялық қауіпсіздік саласындағы жетекші орталық ретіндегі танымалдығын арттыру.",
+    ],
+    about_s2_specific_label: "Нақты міндеттер",
+    about_s2_specific: [
+      "Бұрынғы полигон аумағында кешенді радиоэкологиялық мониторинг ұйымдастыру, соның ішінде жерасты суларын, радионуклидтердің миграциясын, тритийді және басқа ластаушыларды бақылау.",
+      "Радиациялық қауіпсіздік саласындағы зерттеулер жүргізу, доза жүктемесін бағалау және аумақтарды қауіпсіз пайдалану бойынша ұсынымдар әзірлеу.",
+      "МАГАТЭ бағдарламаларын (соның ішінде «Atoms4Food») ауыл шаруашылығында озық технологияларды енгізу бойынша іске асыру.",
+      "Далалық экспедициялық базаны құру және жабдықтау, заманауи ғылыми және мониторингтік жабдықтар, зерттеушілерге арналған модульдік құрылыстар сатып алу.",
+      "Полигонның қауіпсіз аумақтарын бағалау және шаруашылық айналымына тарту үшін сенімді ғылыми база қалыптастыру.",
+      "Музейлік-білім беру кешенін дамыту — просвещение, халықаралық конференциялар, ғылыми экспедициялар және білім беру бағдарламалары.",
+      "Республикалық және халықаралық инвестициялар, гранттық қаражаттар және техникалық ынтымақтастық жобаларын тарту.",
+      "Жоғары білікті кадрлар даярлау, Абай облысының университеттері мен ғылыми ұйымдарымен ынтымақтастықты нығайту.",
+      "Жобаның халықаралық танымалдығын арттыру және зерттеу нәтижелерін жаһандық деңгейде насихаттау.",
     ],
 
     about_s3_heading: "Әдіснама",
@@ -280,23 +283,6 @@ export const translations = {
       "ГАЖ-картографиялау (QGIS, ArcGIS Pro)",
       "Уақыт қатарларын статистикалық талдау (R, Python)",
       "МАГАТЭ әдіснамасы бойынша дозиметриялық модельдеу",
-    ],
-
-    about_s4_heading: "Күтілетін нәтижелер",
-    about_s4_pub_label: "Жарияланым жоспары:",
-    about_s4_pubs: [
-      "Scopus / Web of Science базасының Q1–Q2 рецензияланатын журналдарында кемінде 6 мақала",
-      "1 монография «Шаған өзені бассейнінің радиоэкологиясы» (ҚР ҰҒА баспасы)",
-      "Халықаралық конференцияларда (МАГАТЭ, IRPA, EGU) 3 ғылыми баяндама",
-      "Экология мамандықтарының студенттеріне арналған 1 оқу-әдістемелік құрал",
-    ],
-    about_s4_pract_label: "Практикалық нәтижелер:",
-    about_s4_practs: [
-      "Шаған өзені бассейнінің интерактивті ГАЖ радиоэкологиялық мониторинг жүйесі",
-      "Радиациялық мониторинг деректер базасы (3 жылдан астам үздіксіз бақылау)",
-      "1:50 000 масштабтағы тритий ластануының изосызық карталары",
-      "ҚР ЭГТРМ, ШҚО ТЖД үшін аналитикалық баяндамалар мен ұсынымдар",
-      "Радиациялық экология саласында 2 ғылым кандидаты мен 1 ғылым докторын дайындау",
     ],
 
     // Footer
@@ -330,9 +316,9 @@ export const translations = {
     // Hero
     hero_badge: "Research Project AP22783154 · MES RK",
     hero_title: "Radioecological Observatory",
-    hero_subtitle: "of the Shagan River Basin",
+    hero_subtitle: "Shagan",
     hero_desc:
-      "Comprehensive tritium contamination monitoring, dose burden assessment and development of recommendations for settlements in the influence zone of the Semipalatinsk Nuclear Test Site.",
+      "A modern international scientific infrastructure for comprehensive radioecological monitoring, radiation safety research, groundwater monitoring, radionuclide migration studies, and long-term environmental observation of territories affected by nuclear testing.",
     hero_cta_program: "About the Research Programme",
     hero_cta_gallery: "View Gallery",
 
@@ -341,7 +327,7 @@ export const translations = {
     program_heading: "Radioecological Monitoring of the Shagan River Basin",
     program_heading2: "in the Influence Zone of the Semipalatinsk Nuclear Test Site",
     program_p1:
-      "The programme is implemented under a grant from the Committee of Science, MES RK (project No. AP22783154). The study object is the Shagan River basin — the main water artery of the south-western buffer zone of the Semipalatinsk Nuclear Test Site (SNTS).",
+      "The programme is implemented under a grant from the Committee of Science, Ministry of Science and Higher Education of the Republic of Kazakhstan — «Comprehensive radioecological study of the Shagan River basin and development of recommendations for minimising negative impacts on the environment and population» (No. AP22783154).",
     program_p2:
       "The key contaminant is tritium (³H) — a radioactive hydrogen isotope with a half-life of T₁/₂ = 12.32 years. Entering the hydrosphere as a result of underground nuclear tests, tritium migrates into surface waters and is incorporated into the biological cycle, creating a chronic dose burden on the population.",
     program_feat1_title: "Tritium Monitoring",
@@ -360,7 +346,7 @@ export const translations = {
     program_stat1_label: "monitoring points",
     program_stat2_val: "3",
     program_stat2_label: "years of research",
-    program_stat3_val: "500+",
+    program_stat3_val: "+1500",
     program_stat3_label: "samples analysed",
     program_img_caption: "Field measurements at monitoring point No. 7",
     program_img_sub: "Lower Shagan River · April 2025",
@@ -392,7 +378,6 @@ export const translations = {
     about_s1: "Background",
     about_s2: "Aims & Objectives",
     about_s3: "Methodology",
-    about_s4: "Expected Outcomes",
     about_s5: "Documents",
 
     about_s1_heading: "Research Background",
@@ -404,21 +389,32 @@ export const translations = {
     about_s1_box:
       "Tritium is a chemical analogue of hydrogen and is readily incorporated into water molecules (HTO), making it biologically available. Once ingested through drinking water or food, tritium distributes uniformly throughout all body tissues and creates an additional internal radiation dose.",
     about_s1_p3:
-      "The settlements of Abay, Dolon and Maleyevka, located 50–120 km from the SNTS boundary, use the Shagan River and associated groundwater as a source of drinking water.",
+      "Residents of settlements located in this area use water from the Shagan River for agricultural needs and water from wells for drinking.",
 
-    about_s2_heading: "Aims & Objectives",
-    about_s2_goal_label: "Project Aim:",
-    about_s2_goal:
-      "Development of a comprehensive radioecological monitoring system for the Shagan River basin and a science-based assessment of dose burdens on the population of adjacent territories.",
-    about_s2_tasks_label: "Research Objectives:",
-    about_s2_tasks: [
-      "Establishment of a network of 14 stationary monitoring points for surface and groundwater with GPS positioning and GIS mapping.",
-      "Systematic (quarterly) sampling and analysis of water, bottom sediments and riparian soils for tritium content by liquid scintillation spectrometry.",
-      "Identification of the main pathways and rates of tritium migration from contamination sources to surface watercourses.",
-      "Construction of hydrogeochemical models of contamination distribution using FEFLOW and MODFLOW software.",
-      "Calculation of effective radiation doses for the population via four intake pathways: drinking water, fish, milk and direct exposure.",
-      "Comparative analysis of calculated doses against ICRP-60 standards and Kazakhstan NRB-2014 regulations.",
-      "Development of recommendations for optimising water supply systems and reducing dose burdens for government authorities.",
+    about_s2_heading:
+      "Goals and Objectives of the International Radioecological and Research Observatory «Shagan»",
+    about_s2_main_goal_label: "Main Goal",
+    about_s2_main_goal:
+      "Creation of a unique international scientific infrastructure on the territory of the former Semipalatinsk Nuclear Test Site for comprehensive radioecological monitoring, radiation safety research, long-term environmental observation, and development of a science-education and tourism facility of international significance.",
+    about_s2_strategic_label: "Strategic Goals",
+    about_s2_strategic: [
+      "Formation of an international centre of expertise — Establish the first international centre of expertise in Central Asia in radioecology, radiation safety, agriculture and environmental monitoring.",
+      "Ensuring radiation and environmental safety — Develop a modern long-term monitoring system for radiation conditions, radionuclide migration, groundwater and environmental impacts to protect the population and support management decisions.",
+      "Scientific, technological and socio-economic development of the region — Stimulate the development of Abai Region's scientific potential, strengthen the material and technical base of research and educational organisations, train a new generation of specialists and attract investments and grants.",
+      "Preservation of historical memory and tourism development — Create a museum and education complex dedicated to the history of the Semipalatinsk test site, nuclear science, the anti-nuclear movement and Kazakhstan's contribution to global nuclear disarmament.",
+      "International cooperation — Strengthen partnership with the IAEA and other international organisations, enhance the recognition of Kazakhstan and Abai Region as a leading centre of nuclear and radiation safety.",
+    ],
+    about_s2_specific_label: "Specific Tasks",
+    about_s2_specific: [
+      "Organisation of comprehensive radioecological monitoring on the territory of the former test site, including monitoring of groundwater, radionuclide migration, tritium and other contaminants.",
+      "Conducting research in radiation safety, dose burden assessment and development of recommendations for safe use of territories.",
+      "Implementation of IAEA programmes (in particular, «Atoms4Food») to introduce advanced technologies in agriculture: increasing crop yields, efficient use of water resources, soil improvement and livestock development.",
+      "Creation and equipping of a field expedition base, acquisition of modern scientific and monitoring equipment, modular facilities for researchers.",
+      "Formation of a reliable scientific basis for assessing and involving safe areas of the test site in economic use.",
+      "Development of the museum and education complex as a centre for outreach, international conferences, scientific expeditions and educational programmes.",
+      "Attracting national and international investments, grant funding and technical cooperation projects.",
+      "Training highly qualified personnel, strengthening cooperation with universities and research organisations of Abai Region.",
+      "Enhancing the international visibility of the project and promoting research results at the global level.",
     ],
 
     about_s3_heading: "Methodology",
@@ -437,23 +433,6 @@ export const translations = {
       "GIS mapping (QGIS, ArcGIS Pro)",
       "Time-series statistical analysis (R, Python)",
       "Dosimetric modelling following IAEA methodology",
-    ],
-
-    about_s4_heading: "Expected Outcomes",
-    about_s4_pub_label: "Publication Plan:",
-    about_s4_pubs: [
-      "At least 6 articles in peer-reviewed Q1–Q2 Scopus / Web of Science journals",
-      "1 monograph «Radioecology of the Shagan River Basin» (RK NAS Publishing)",
-      "3 scientific reports at international conferences (IAEA, IRPA, EGU)",
-      "1 teaching manual for students of environmental specialisations",
-    ],
-    about_s4_pract_label: "Practical Outcomes:",
-    about_s4_practs: [
-      "Interactive GIS radioecological monitoring system for the Shagan River basin",
-      "Radiation monitoring database (>3 years of continuous observations)",
-      "Tritium contamination isoline maps at 1:50 000 scale",
-      "Analytical reports and recommendations for MoE of RK, Civil Protection Dept. of EKO",
-      "Training of 2 PhD candidates and 1 Doctor of Science in radiation ecology",
     ],
 
     // Footer

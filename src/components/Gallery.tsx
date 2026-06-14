@@ -134,7 +134,7 @@ export default function Gallery() {
               key={img.id}
               className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2"
               onClick={() => setLightboxIndex(idx)}
-              aria-label={`${t("gallery_open")}: ${isEN && img.caption_en ? img.caption_en : isKZ && img.caption_kz ? img.caption_kz : img.caption}`}
+              aria-label={`${t("gallery_open")}: ${isEN && img.alt_en ? img.alt_en : isKZ && img.alt_kz ? img.alt_kz : img.alt}`}
             >
               <Image
                 src={img.src}
@@ -143,11 +143,6 @@ export default function Gallery() {
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
-              <div className="absolute inset-0 bg-[#0F2C59]/0 group-hover:bg-[#0F2C59]/40 transition-colors duration-300 flex items-end p-3">
-                <p className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-left leading-snug">
-                  {isEN && img.caption_en ? img.caption_en : isKZ && img.caption_kz ? img.caption_kz : img.caption}
-                </p>
-              </div>
             </button>
           ))}
         </div>
