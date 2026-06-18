@@ -1,12 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ZoomIn, Images, ChevronUp } from "lucide-react";
 import { galleryImages, GalleryImage } from "@/data/mockData";
 import { useLang } from "@/context/LangContext";
 
-function Lightbox({
+function getImageText(
+  img: GalleryImage,
+  lang: string,
+  field: "alt" | "caption",
+): string {
+  const isKZ = lang === "KZ";
+  const isEN = lang === "EN";
+
+  if (field === "alt") {
+    return isEN && img.alt_en ? img.alt_en : isKZ && img.alt_kz ? img.alt_kz : img.alt;
+  }
+
+  return isEN && img.caption_en
+    ? img.caption_en
+    : isKZ && img.caption_kz
+      ? img.caption_kz
+      : img.caption;
+}
+
+function GalleryLightbox({
   images,
   startIndex,
   onClose,
@@ -16,104 +35,171 @@ function Lightbox({
   onClose: () => void;
 }) {
   const [current, setCurrent] = useState(startIndex);
-  const { lang } = useLang();
-  const isKZ = lang === "KZ";
-  const isEN = lang === "EN";
+  const { t, lang } = useLang();
+  const thumbsRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
-  const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
-  const next = () => setCurrent((c) => (c + 1) % images.length);
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + images.length) % images.length),
+    [images.length],
+  );
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % images.length),
+    [images.length],
+  );
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowLeft") prev();
-    if (e.key === "ArrowRight") next();
-    if (e.key === "Escape") onClose();
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [prev, next, onClose]);
+
+  useEffect(() => {
+    const container = thumbsRef.current;
+    const active = container?.querySelector<HTMLElement>(`[data-index="${current}"]`);
+    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [current]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
   };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 50) {
+      if (delta > 0) prev();
+      else next();
+    }
+    touchStartX.current = null;
+  };
+
+  const currentImage = images[current];
 
   return (
     <div
-      className="fixed inset-0 z-[100] bg-black/90 flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[200] bg-black/92 flex flex-col"
       onClick={onClose}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
+      role="dialog"
+      aria-modal="true"
+      aria-label={getImageText(currentImage, lang, "alt")}
     >
-      <button
-        className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
-        onClick={onClose}
-        aria-label="Закрыть"
-      >
-        <X size={22} />
-      </button>
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 sm:px-6 shrink-0">
+        <p className="text-white/60 text-sm font-medium">
+          {current + 1} / {images.length}
+        </p>
+        <button
+          onClick={onClose}
+          className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          aria-label={t("gallery_close")}
+        >
+          <X size={22} />
+        </button>
+      </div>
 
-      <p className="absolute top-5 left-1/2 -translate-x-1/2 text-white/50 text-sm font-medium">
-        {current + 1} / {images.length}
-      </p>
-
+      {/* Main viewer */}
       <div
-        className="relative w-full max-w-4xl max-h-[70vh] mx-2 sm:mx-4"
+        className="relative flex-1 flex items-center justify-center min-h-0 px-3 sm:px-12"
         onClick={(e) => e.stopPropagation()}
-        style={{ aspectRatio: "16/9" }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
-        <Image
-          src={images[current].src}
-          alt={images[current].alt}
-          fill
-          className="object-contain"
-          sizes="(max-width: 1024px) 100vw, 900px"
-          priority
-        />
+        <div className="relative w-full h-full max-w-5xl max-h-[calc(100vh-220px)]">
+          <Image
+            key={currentImage.src}
+            src={currentImage.src}
+            alt={getImageText(currentImage, lang, "alt")}
+            fill
+            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 900px"
+            priority
+          />
+        </div>
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors z-10"
+              aria-label={t("gallery_prev")}
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors z-10"
+              aria-label={t("gallery_next")}
+            >
+              <ChevronRight size={24} />
+            </button>
+          </>
+        )}
       </div>
 
-      <p className="text-white/70 text-sm mt-4 px-6 text-center">
-        {isEN && images[current].caption_en ? images[current].caption_en : isKZ && images[current].caption_kz ? images[current].caption_kz : images[current].caption}
+      {/* Caption */}
+      <p className="text-white/75 text-sm sm:text-base text-center px-6 py-3 max-w-3xl mx-auto shrink-0">
+        {getImageText(currentImage, lang, "caption")}
       </p>
 
-      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-1 sm:px-3 pointer-events-none">
-        <button
-          className="pointer-events-auto p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-          onClick={(e) => { e.stopPropagation(); prev(); }}
-          aria-label="Предыдущее фото"
+      {/* Thumbnails */}
+      {images.length > 1 && (
+        <div
+          ref={thumbsRef}
+          className="shrink-0 flex gap-2 px-4 pb-4 overflow-x-auto scrollbar-none"
+          onClick={(e) => e.stopPropagation()}
         >
-          <ChevronLeft size={22} />
-        </button>
-        <button
-          className="pointer-events-auto p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-          onClick={(e) => { e.stopPropagation(); next(); }}
-          aria-label="Следующее фото"
-        >
-          <ChevronRight size={22} />
-        </button>
-      </div>
-
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 px-3 overflow-x-auto max-w-full scrollbar-none">
-        {images.map((img, idx) => (
-          <button
-            key={img.id}
-            onClick={(e) => { e.stopPropagation(); setCurrent(idx); }}
-            className={`relative flex-shrink-0 w-9 h-6 sm:w-12 sm:h-8 rounded overflow-hidden border-2 transition-all ${
-              idx === current
-                ? "border-[#4A90E2] opacity-100"
-                : "border-transparent opacity-50 hover:opacity-75"
-            }`}
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className="object-cover"
-              sizes="50px"
-            />
-          </button>
-        ))}
-      </div>
+          {images.map((img, idx) => (
+            <button
+              key={img.id}
+              data-index={idx}
+              onClick={() => setCurrent(idx)}
+              className={`relative flex-shrink-0 w-14 h-10 sm:w-16 sm:h-12 rounded-lg overflow-hidden border-2 transition-all duration-150 ${
+                idx === current
+                  ? "border-[#4A90E2] opacity-100 scale-105"
+                  : "border-white/20 opacity-50 hover:opacity-90 hover:border-white/50"
+              }`}
+              aria-label={`${idx + 1}. ${getImageText(img, lang, "alt")}`}
+              aria-current={idx === current ? "true" : undefined}
+            >
+              <Image
+                src={img.src}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="64px"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 export default function Gallery() {
+  const [isExpanded, setIsExpanded] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { t, lang } = useLang();
-  const isKZ = lang === "KZ";
-  const isEN = lang === "EN";
+
+  const previewImages = galleryImages.slice(0, 4);
 
   return (
     <section id="gallery" className="py-20 bg-[#F4F7FC]">
@@ -124,32 +210,90 @@ export default function Gallery() {
         <h2 className="text-[#0F2C59] font-bold text-2xl sm:text-3xl mb-2">
           {t("gallery_heading")}
         </h2>
-        <p className="text-[#6B7280] text-sm mb-10">
+        <p className="text-[#6B7280] text-sm mb-8">
           {t("gallery_desc")}
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-          {galleryImages.map((img, idx) => (
+        {!isExpanded ? (
+          <div className="bg-white border border-[#E2EAF4] rounded-2xl p-6 sm:p-8">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-xl mb-6">
+              {previewImages.map((img) => (
+                <div
+                  key={img.id}
+                  className="relative aspect-square rounded-lg overflow-hidden"
+                >
+                  <Image
+                    src={img.src}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="120px"
+                  />
+                </div>
+              ))}
+            </div>
             <button
-              key={img.id}
-              className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2"
-              onClick={() => setLightboxIndex(idx)}
-              aria-label={`${t("gallery_open")}: ${isEN && img.alt_en ? img.alt_en : isKZ && img.alt_kz ? img.alt_kz : img.alt}`}
+              type="button"
+              onClick={() => setIsExpanded(true)}
+              aria-expanded={false}
+              className="inline-flex items-center gap-2.5 bg-[#4A90E2] hover:bg-[#0F2C59] text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-xl transition-colors duration-200 shadow-md hover:shadow-lg"
             >
-              <Image
-                src={img.src}
-                alt={isEN && img.alt_en ? img.alt_en : isKZ && img.alt_kz ? img.alt_kz : img.alt}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              />
+              <Images size={20} />
+              {t("gallery_tab")} · {t("gallery_view")}
+              <span className="text-white/80 font-normal">
+                · {galleryImages.length} {t("gallery_photos_count")}
+              </span>
             </button>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+              <p className="text-[#0F2C59] font-semibold text-sm sm:text-base">
+                {galleryImages.length} {t("gallery_photos_count")}
+              </p>
+              <button
+                type="button"
+                onClick={() => setIsExpanded(false)}
+                aria-expanded={true}
+                className="inline-flex items-center gap-2 text-[#4A90E2] hover:text-[#0F2C59] font-semibold text-sm transition-colors duration-200"
+              >
+                <ChevronUp size={18} />
+                {t("gallery_hide")}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+              {galleryImages.map((img, idx) => (
+                <button
+                  key={img.id}
+                  type="button"
+                  className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2"
+                  onClick={() => setLightboxIndex(idx)}
+                  aria-label={`${t("gallery_open")}: ${getImageText(img, lang, "alt")}`}
+                >
+                  <Image
+                    src={img.src}
+                    alt={getImageText(img, lang, "alt")}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
+                    <ZoomIn
+                      size={28}
+                      className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                    />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {lightboxIndex !== null && (
-        <Lightbox
+        <GalleryLightbox
+          key={lightboxIndex}
           images={galleryImages}
           startIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}

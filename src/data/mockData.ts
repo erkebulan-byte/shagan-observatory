@@ -59,6 +59,8 @@ export const newsData: NewsItem[] = [
 ];
 
 // ─── GALLERY DATA ─────────────────────────────────────────────────────────────
+import { extraGalleryImages } from "./galleryExtra";
+
 export interface GalleryImage {
   id: number;
   src: string;
@@ -291,6 +293,7 @@ export const galleryImages: GalleryImage[] = [
     caption_kz: "Құс шаруашылығы үлгілерін іріктеуге арналған эксперименттік орнатуда далалық жұмыстар",
     caption_en: "Field work at the poultry sampling experimental setup",
   },
+  ...extraGalleryImages(23),
 ];
 
 // ─── TEAM DATA ────────────────────────────────────────────────────────────────
@@ -677,7 +680,7 @@ export const teamMembers: TeamMember[] = [
     role: "Исполнитель",
     role_kz: "Орындаушы",
     role_en: "Researcher",
-    avatar: "/team/member13.png",
+    avatar: "/team/member13.jpg",
     bio: "Байгазы С.А. — магистрант, научный сотрудник Института радиационной безопасности и экологии НЯЦ РК. Обладает 15-летним опытом в радиоэкологии, является автором 10 публикаций, исполнителем проектов МОН РК и МНТЦ.",
     bio_kz: "Байгазы С.А. — магистрант, ҚР ЯЦ Радиациялық қауіпсіздік және экология институтының (РБЖЭ) ғылыми қызметкері. Радиоэкология саласында 15 жылдық тәжірибеге ие, 10 жарияланымның авторы, ҚР БҒМ және ХҒТОД жобаларының орындаушысы.",
     bio_en: "S.A. Baigazy is a master's student and research scientist at the Institute of Radiation Safety and Ecology, NNC RK. He has 15 years of experience in radioecology, is the author of 10 publications and an executor of MES RK and ISTC projects.",

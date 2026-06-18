@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { Calendar, X, ChevronRight, ChevronLeft, ZoomIn } from "lucide-react";
+import { Calendar, X, ChevronRight, ChevronLeft, ZoomIn, Newspaper } from "lucide-react";
 import { newsData, NewsItem } from "@/data/mockData";
 import { useLang } from "@/context/LangContext";
 
@@ -223,7 +223,7 @@ function NewsCard({ item, onOpen }: { item: NewsItem; onOpen: () => void }) {
 
   return (
     <>
-      <article className="bg-[#F4F7FC] border border-[#E2EAF4] rounded-2xl p-6 flex flex-col gap-4 hover:border-[#4A90E2]/50 transition-colors duration-200">
+      <article className="bg-[#F4F7FC] border border-[#E2EAF4] rounded-2xl p-6 flex flex-col gap-4 h-full hover:border-[#4A90E2]/50 transition-colors duration-200">
         {/* Date */}
         <div className="flex items-center gap-2 text-[#6B7280] text-xs font-medium">
           <Calendar size={13} />
@@ -291,6 +291,44 @@ function NewsCard({ item, onOpen }: { item: NewsItem; onOpen: () => void }) {
   );
 }
 
+/* ─── Placeholder Card ───────────────────────────────────────────────────── */
+function NewsPlaceholderCard() {
+  const { t } = useLang();
+
+  return (
+    <article
+      aria-hidden="true"
+      className="bg-[#F4F7FC] border border-dashed border-[#C5D5E8] rounded-2xl p-6 flex flex-col gap-4 h-full"
+    >
+      <div className="flex items-center gap-2 text-[#9CA3AF] text-xs font-medium">
+        <Newspaper size={13} />
+        <span>{t("news_label")}</span>
+      </div>
+
+      <h3 className="text-[#6B7280] font-bold text-base leading-snug">
+        {t("news_placeholder_title")}
+      </h3>
+
+      <p className="text-[#9CA3AF] text-sm leading-relaxed flex-1">
+        {t("news_placeholder_text")}
+      </p>
+
+      <div className="grid grid-cols-2 gap-2">
+        {[0, 1].map((slot) => (
+          <div
+            key={slot}
+            className="aspect-video rounded-lg border border-dashed border-[#D1DCE8] bg-[#EAF0F8]/60"
+          />
+        ))}
+      </div>
+
+      <div className="self-start h-5 w-24 rounded-md bg-[#E2EAF4]/80" />
+    </article>
+  );
+}
+
+const NEWS_GRID_COLUMNS = 2;
+
 /* ─── News Section ───────────────────────────────────────────────────────── */
 export default function News() {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
@@ -313,6 +351,11 @@ export default function News() {
               item={item}
               onOpen={() => setSelectedNews(item)}
             />
+          ))}
+          {Array.from({
+            length: (NEWS_GRID_COLUMNS - (newsData.length % NEWS_GRID_COLUMNS)) % NEWS_GRID_COLUMNS,
+          }).map((_, index) => (
+            <NewsPlaceholderCard key={`placeholder-${index}`} />
           ))}
         </div>
       </div>

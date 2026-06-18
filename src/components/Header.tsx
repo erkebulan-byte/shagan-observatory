@@ -1,48 +1,41 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 import DocumentsModal from "@/components/DocumentsModal";
+import LangToggle from "@/components/LangToggle";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [docsOpen, setDocsOpen] = useState(false);
   const { lang, setLang, t } = useLang();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   const navLinks = [
-    { key: "nav_program" as const, href: "#program" },
-    { key: "nav_news" as const, href: "#news" },
-    { key: "nav_gallery" as const, href: "#gallery" },
-    { key: "nav_team" as const, href: "#team" },
-    { key: "nav_partners" as const, href: "#footer" },
+    { key: "nav_program" as const, href: sectionHref("program") },
+    { key: "nav_news" as const, href: sectionHref("news") },
+    { key: "nav_gallery" as const, href: sectionHref("gallery") },
+    { key: "nav_team" as const, href: sectionHref("team") },
+    { key: "nav_partners" as const, href: sectionHref("footer") },
   ];
 
   const aboutDropdown = [
-    { key: "nav_about_lab" as const, href: "#about", onClick: undefined as (() => void) | undefined },
+    { key: "nav_about_lab" as const, href: sectionHref("about"), onClick: undefined as (() => void) | undefined },
     { key: "nav_about_docs" as const, href: "#", onClick: () => setDocsOpen(true) },
   ];
 
-  const handleNavClick = () => { setIsOpen(false); setAboutOpen(false); };
+  const infoLinkClass =
+    pathname === "/info"
+      ? "text-[#4A90E2] font-semibold"
+      : "text-[#1E3E62] hover:text-[#4A90E2]";
 
-  const LangToggle = () => (
-    <div className="flex items-center border border-[#CBD5E0] rounded-md overflow-hidden text-xs font-semibold">
-      {(["RU", "KZ", "EN"] as const).map((l) => (
-        <button
-          key={l}
-          onClick={() => setLang(l)}
-          className={`px-3 py-1.5 transition-colors ${
-            lang === l
-              ? "bg-[#0F2C59] text-white"
-              : "text-[#6B7280] hover:bg-[#F4F7FC]"
-          }`}
-        >
-          {l}
-        </button>
-      ))}
-    </div>
-  );
+  const handleNavClick = () => { setIsOpen(false); setAboutOpen(false); };
 
   return (
     <>
@@ -50,7 +43,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <div className="w-8 h-8 rounded-full bg-[#0F2C59] flex items-center justify-center flex-shrink-0">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A90E2" strokeWidth="1.5">
                 <circle cx="12" cy="12" r="3" fill="#4A90E2" />
@@ -63,7 +56,7 @@ export default function Header() {
               <span className="font-black text-[#0F2C59] text-sm tracking-widest uppercase">SHAGAN</span>
               <span className="font-semibold text-[#4A90E2] text-xs tracking-[0.2em] uppercase">OBSERVATORY</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-6">
@@ -80,7 +73,7 @@ export default function Header() {
             {/* О проекте — dropdown */}
             <div className="relative group">
               <a
-                href="#about"
+                href={sectionHref("about")}
                 className="flex items-center gap-1 text-sm text-[#1E3E62] hover:text-[#4A90E2] transition-colors duration-200 font-medium"
               >
                 {t("nav_about")}
@@ -103,11 +96,18 @@ export default function Header() {
                 ))}
               </div>
             </div>
+
+            <Link
+              href="/info"
+              className={`text-sm transition-colors duration-200 font-medium ${infoLinkClass}`}
+            >
+              {t("nav_info")}
+            </Link>
           </nav>
 
           {/* Right Actions */}
           <div className="hidden lg:flex items-center gap-3">
-            <LangToggle />
+            <LangToggle lang={lang} onChange={setLang} />
             <a
               href="https://wa.me/77072108847"
               target="_blank"
@@ -177,8 +177,17 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+            <Link
+              href="/info"
+              onClick={handleNavClick}
+              className={`font-medium py-2.5 px-3 rounded-lg hover:bg-[#F4F7FC] transition-colors ${infoLinkClass}`}
+            >
+              {t("nav_info")}
+            </Link>
+
             <div className="pt-3 border-t border-[#E8EFF8] mt-2 flex items-center gap-3">
-              <LangToggle />
+              <LangToggle lang={lang} onChange={setLang} />
               <a
                 href="https://wa.me/77072108847"
                 target="_blank"

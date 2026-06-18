@@ -1,0 +1,375 @@
+.wrapper {
+  width: 100%;
+  padding: 0.25rem 0 0.5rem;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.card {
+  position: relative;
+  background: linear-gradient(145deg, #eef4fa 0%, #e4edf6 100%);
+  border: 1px solid #d5e3f0;
+  border-radius: 1rem;
+  padding: 1.25rem 1.35rem 1.35rem;
+  min-height: 9.5rem;
+  color: #1e3e62;
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.cardVisible {
+  animation: cardEnter 0.65s ease forwards;
+}
+
+.card:hover {
+  transform: translateY(-0.25rem) scale(1.02);
+  border-color: #b8cfe8;
+  box-shadow:
+    0 14px 32px rgba(30, 62, 98, 0.12),
+    0 0 24px rgba(74, 144, 226, 0.18);
+}
+
+.cardVisible:hover {
+  transform: translateY(-0.25rem) scale(1.02);
+}
+
+.cardIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: #4a90e2;
+  opacity: 0.95;
+}
+
+.cardIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cardTitle {
+  margin: 0;
+  padding-right: 3.25rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0f2c59;
+}
+
+.cardDesc {
+  margin: 0.65rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #1e3e62;
+}
+
+.centerWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.88);
+}
+
+.centerWrapVisible {
+  animation: centerEnter 0.8s ease 0.35s forwards;
+}
+
+.centerGlow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13.5rem;
+  height: 13.5rem;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.centerGlow::before,
+.centerGlow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.centerGlow::before {
+  inset: -10px;
+  background: radial-gradient(
+    circle,
+    rgba(34, 197, 94, 0.55) 0%,
+    rgba(34, 197, 94, 0.28) 42%,
+    rgba(34, 197, 94, 0.08) 68%,
+    transparent 78%
+  );
+  filter: blur(6px);
+  animation: pulseGlowHaloNear 3.4s ease-in-out infinite;
+}
+
+.centerGlow::after {
+  inset: -28px;
+  background: radial-gradient(
+    circle,
+    rgba(74, 222, 128, 0.32) 0%,
+    rgba(34, 197, 94, 0.16) 45%,
+    transparent 72%
+  );
+  filter: blur(14px);
+  animation: pulseGlowHaloFar 3.4s ease-in-out infinite 0.2s;
+}
+
+.centerCircle {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: #ffffff;
+  overflow: visible;
+  border: 2px solid rgba(34, 197, 94, 0.28);
+  box-shadow:
+    0 0 0 4px rgba(187, 247, 208, 0.45),
+    0 0 18px rgba(34, 197, 94, 0.55),
+    0 0 36px rgba(34, 197, 94, 0.38),
+    0 0 64px rgba(34, 197, 94, 0.22),
+    0 0 96px rgba(74, 222, 128, 0.14),
+    inset 0 0 24px rgba(34, 197, 94, 0.08);
+  animation: pulseGlowCore 3.4s ease-in-out infinite;
+}
+
+.centerSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.centerDisc {
+  fill: #ffffff;
+}
+
+.centerTextRing {
+  transform-origin: 120px 120px;
+  transform-box: view-box;
+  animation: centerTextSpin 30s linear infinite;
+  will-change: transform;
+}
+
+.centerTextTop,
+.centerTextBottom {
+  fill: #0f2c59;
+  font-size: 10.75px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.centerTextBottom {
+  letter-spacing: 0.01em;
+}
+
+@keyframes centerTextSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .layout {
+    display: block;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 13.5rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 1.25rem;
+    row-gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .cardTopLeft {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .cardTopRight {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .cardBottomLeft {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .cardBottomRight {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .centerWrap {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    justify-self: center;
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  .centerGlow {
+    width: 14.5rem;
+    height: 14.5rem;
+  }
+
+  .centerTextTop,
+  .centerTextBottom {
+    font-size: 11px;
+  }
+
+  .card {
+    min-height: 10.5rem;
+    padding: 1.35rem 1.5rem 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.125rem;
+  }
+
+  .cardDesc {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 16rem 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+  }
+
+  .centerGlow {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .centerTextTop,
+  .centerTextBottom {
+    font-size: 11.5px;
+    letter-spacing: 0.025em;
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes centerEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlowCore {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(187, 247, 208, 0.42),
+      0 0 18px rgba(34, 197, 94, 0.5),
+      0 0 36px rgba(34, 197, 94, 0.34),
+      0 0 64px rgba(34, 197, 94, 0.2),
+      0 0 96px rgba(74, 222, 128, 0.12),
+      inset 0 0 24px rgba(34, 197, 94, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(187, 247, 208, 0.58),
+      0 0 28px rgba(34, 197, 94, 0.72),
+      0 0 52px rgba(34, 197, 94, 0.48),
+      0 0 84px rgba(34, 197, 94, 0.3),
+      0 0 120px rgba(74, 222, 128, 0.2),
+      inset 0 0 32px rgba(34, 197, 94, 0.14);
+  }
+}
+
+@keyframes pulseGlowHaloNear {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes pulseGlowHaloFar {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .centerWrap {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .centerCircle,
+  .centerGlow::before,
+  .centerGlow::after {
+    animation: none;
+  }
+
+  .centerTextRing {
+    animation: none;
+  }
+}

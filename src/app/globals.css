@@ -32,6 +32,19 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes lab-gallery-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lab-gallery-fade-in {
+  animation: lab-gallery-fade-in 0.3s ease;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -51,9 +64,4 @@ html {
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;
-}
-
-/* Safe tap highlight removal for buttons on mobile */
-button, a {
-  -webkit-tap-highlight-color: transparent;
 }

@@ -23,7 +23,7 @@ export default function Program() {
           {t("program_label")}
         </p>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Left: Content Card */}
           <div className="bg-[#F4F7FC] border border-[#E2EAF4] rounded-2xl p-7 sm:p-9">
             <h2 className="text-[#0F2C59] font-bold text-xl sm:text-2xl leading-tight mb-4">
@@ -61,7 +61,6 @@ export default function Program() {
               ))}
             </div>
 
-            {/* Stats row */}
             <div className="mt-7 pt-6 border-t border-[#E2EAF4] grid grid-cols-3 gap-4 text-center">
               {[
                 { val: "program_stat1_val", label: "program_stat1_label" },
@@ -79,15 +78,28 @@ export default function Program() {
             </div>
           </div>
 
-          {/* Right: Image */}
-          <div className="relative rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.04] hover:shadow-xl cursor-default h-56 sm:h-72 md:h-96 lg:h-auto lg:min-h-[480px]">
-            <Image
-              src="/gallery/gallery1.jpg"
-              alt="Полевые измерения с GPS-навигатором в степи"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          {/* Right: Photos — natural aspect ratio, no stretch */}
+          <div className="flex flex-col gap-4 lg:gap-6">
+            <div className="rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
+              <Image
+                src="/gallery/gallery1.jpg"
+                alt={t("program_img_caption")}
+                width={960}
+                height={1280}
+                className="w-full h-auto"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
+              <Image
+                src="/gallery/gallery4.jpg"
+                alt={t("program_img_sub")}
+                width={1280}
+                height={960}
+                className="w-full h-auto"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </div>

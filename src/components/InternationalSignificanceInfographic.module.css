@@ -1,0 +1,367 @@
+.wrapper {
+  width: 100%;
+  padding: 0.5rem 0 0.75rem;
+  overflow: visible;
+}
+
+.layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  /* Room for cards to slide in without being clipped by accordion overflow */
+  padding: 2.75rem 1.75rem;
+}
+
+.connectorSvg {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+.connectorPath {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.35));
+  transition:
+    stroke 0.35s ease,
+    stroke-width 0.35s ease,
+    filter 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.connectorVisible {
+  animation:
+    connectorEnter 0.75s ease-out forwards,
+    connectorPulse 3.2s ease-in-out 0.75s infinite;
+}
+
+.connectorActive {
+  stroke: #16a34a;
+  stroke-width: 0.85;
+  filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.85));
+  animation: none;
+  opacity: 1 !important;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  background: rgba(45, 55, 72, 0.88);
+  backdrop-filter: blur(6px);
+  border-radius: 0.625rem;
+  padding: 0;
+  overflow: hidden;
+  color: #f8fafc;
+  opacity: 0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22);
+  will-change: transform, opacity;
+  transition: box-shadow 0.35s ease;
+}
+
+/* Initial offset before entrance (overridden by keyframes when .cardVisible) */
+.cardEnterTopLeft {
+  transform: translate(-2.75rem, -2.75rem) scale(0.85);
+}
+
+.cardEnterBottomLeft {
+  transform: translate(-2.75rem, 2.75rem) scale(0.85);
+}
+
+.cardEnterTopRight {
+  transform: translate(2.75rem, -2.75rem) scale(0.85);
+}
+
+.cardEnterBottomRight {
+  transform: translate(2.75rem, 2.75rem) scale(0.85);
+}
+
+.cardEnterTopLeft.cardVisible {
+  animation: cardEnterTopLeft 0.9s ease-out forwards;
+}
+
+.cardEnterBottomLeft.cardVisible {
+  animation: cardEnterBottomLeft 0.9s ease-out forwards;
+}
+
+.cardEnterTopRight.cardVisible {
+  animation: cardEnterTopRight 0.9s ease-out forwards;
+}
+
+.cardEnterBottomRight.cardVisible {
+  animation: cardEnterBottomRight 0.9s ease-out forwards;
+}
+
+.cardStripe {
+  height: 4px;
+  background: linear-gradient(90deg, #16a34a 0%, #22c55e 50%, #4ade80 100%);
+}
+
+.cardBody {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.cardDesc {
+  margin: 0.55rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+.cardVisible:hover,
+.cardVisible:focus-visible {
+  transform: translateY(-0.35rem) scale(1);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-0.35rem) scale(1);
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.28),
+    0 0 28px rgba(34, 197, 94, 0.12);
+  outline: none;
+}
+
+.photoWrap {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.94);
+  border: 2px solid #4a90e2;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #eef4fa;
+  box-shadow: 0 10px 32px rgba(30, 62, 98, 0.14);
+}
+
+.photoVisible {
+  animation: photoZoomIn 0.85s ease 0.2s forwards;
+}
+
+.photoImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.mobileOrderTop {
+  order: 1;
+}
+
+.mobileOrderPhoto {
+  order: 2;
+}
+
+.mobileOrderBottom {
+  order: 3;
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .photoWrap {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 1.45fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 1.25rem;
+    row-gap: 1.25rem;
+    align-items: stretch;
+    padding: 2.5rem 2rem;
+  }
+
+  .connectorSvg {
+    display: block;
+  }
+
+  .cardTopLeft {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .cardBottomLeft {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+  }
+
+  .cardTopRight {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .cardBottomRight {
+    grid-column: 3;
+    grid-row: 2;
+    align-self: end;
+  }
+
+  .photoWrap {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    order: unset;
+  }
+
+  .cardTopLeft,
+  .cardBottomLeft,
+  .cardTopRight,
+  .cardBottomRight {
+    order: unset;
+  }
+
+  .cardBody {
+    padding: 1.1rem 1.2rem 1.25rem;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .cardDesc {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+  }
+
+  .cardBody {
+    padding: 1.15rem 1.3rem 1.3rem;
+  }
+}
+
+@keyframes cardEnterTopLeft {
+  from {
+    opacity: 0;
+    transform: translate(-2.75rem, -2.75rem) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes cardEnterBottomLeft {
+  from {
+    opacity: 0;
+    transform: translate(-2.75rem, 2.75rem) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes cardEnterTopRight {
+  from {
+    opacity: 0;
+    transform: translate(2.75rem, -2.75rem) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes cardEnterBottomRight {
+  from {
+    opacity: 0;
+    transform: translate(2.75rem, 2.75rem) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes photoZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes connectorEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.8;
+  }
+}
+
+@keyframes connectorPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.3));
+    opacity: 0.65;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.65));
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .photoWrap,
+  .connectorPath {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .cardEnterTopLeft,
+  .cardEnterBottomLeft,
+  .cardEnterTopRight,
+  .cardEnterBottomRight {
+    transform: none;
+  }
+
+  .photoWrap {
+    transform: scale(1);
+  }
+}

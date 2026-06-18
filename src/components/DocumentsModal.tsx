@@ -18,45 +18,45 @@ const documents = [
     name_en: "Document No. 452549",
   },
   {
-    file: "Патент Отбор проб воды.pdf",
-    name_ru: "Патент — Отбор проб воды",
-    name_kz: "Патент — Су үлгілерін іріктеу",
-    name_en: "Patent — Water Sampling",
+    file: "patent-water-sample.pdf",
+    name_ru: "Патент на пробу воды",
+    name_kz: "Су үлгісіне патент",
+    name_en: "Patent for Water Sampling",
   },
   {
     file: "Темиржанова А.Е._Жандаевские чтения_2025 г..pdf",
-    name_ru: "Темиржанова А.Е. — Жандаевские чтения, 2025",
-    name_kz: "Темиржанова А.Е. — Жандай оқулары, 2025",
-    name_en: "Temirzhanova A.E. — Zhandayev Readings, 2025",
+    name_ru: "Особенности загрязнения поверхностного водотока Семипалатинского испытательного полигона",
+    name_kz: "Семей ядролық сынақ полигонының беткі су ағынының ластану ерекшеліктері",
+    name_en: "Features of Surface Watercourse Contamination at the Semipalatinsk Test Site",
   },
   {
     file: "Темиржанова и др._2025_Вестник ЕНУ_151(2)..pdf",
-    name_ru: "Темиржанова и др. — Вестник ЕНУ, 2025, №151(2)",
-    name_kz: "Темиржанова т.б. — ЕҰУ хабаршысы, 2025, №151(2)",
-    name_en: "Temirzhanova et al. — ENU Bulletin, 2025, No. 151(2)",
+    name_ru: "Вестник ЕНУ, 2025, №151(2)",
+    name_kz: "ЕҰУ хабаршысы, 2025, №151(2)",
+    name_en: "ENU Bulletin, 2025, No. 151(2)",
   },
   {
     file: "Темиржанова и др._ГиЭ_октябрь, 2025..pdf",
-    name_ru: "Темиржанова и др. — Гидробиология и экология, октябрь 2025",
-    name_kz: "Темиржанова т.б. — Гидробиология және экология, қазан 2025",
-    name_en: "Temirzhanova et al. — Hydrobiology & Ecology, October 2025",
+    name_ru: "Гидробиология и экология, октябрь 2025",
+    name_kz: "Гидробиология және экология, қазан 2025",
+    name_en: "Hydrobiology & Ecology, October 2025",
   },
   {
     file: "Темиржанова и др._конф._ТПУ.pdf",
-    name_ru: "Темиржанова и др. — Конференция ТПУ",
-    name_kz: "Темиржанова т.б. — ТПУ конференциясы",
-    name_en: "Temirzhanova et al. — TPU Conference",
+    name_ru: "Конференция ТПУ",
+    name_kz: "ТПУ конференциясы",
+    name_en: "TPU Conference",
   },
   {
     file: "Фараби әлемі_2025_Арай..pdf",
-    name_ru: "Фараби әлемі, 2025 — Арай Темиржанова",
-    name_kz: "Фараби әлемі, 2025 — Арай Темиржанова",
-    name_en: "Farabi World, 2025 — Arai Temirzhanova",
+    name_ru: "Фараби әлемі, 2025",
+    name_kz: "Фараби әлемі, 2025",
+    name_en: "Farabi World, 2025",
   },
 ];
 
 export default function DocumentsModal({ onClose }: { onClose: () => void }) {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -71,9 +71,6 @@ export default function DocumentsModal({ onClose }: { onClose: () => void }) {
   const getName = (doc: typeof documents[0]) =>
     lang === "KZ" ? doc.name_kz : lang === "EN" ? doc.name_en : doc.name_ru;
 
-  const heading =
-    lang === "KZ" ? "Рұқсат құжаттары" : lang === "EN" ? "Regulatory Documents" : "Разрешительные документы";
-
   return (
     <div
       className="fixed inset-0 z-[150] bg-black/60 flex items-center justify-center p-4"
@@ -85,7 +82,7 @@ export default function DocumentsModal({ onClose }: { onClose: () => void }) {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#E8EFF8]">
-          <h2 className="text-[#0F2C59] font-bold text-lg">{heading}</h2>
+          <h2 className="text-[#0F2C59] font-bold text-lg">{t("nav_about_docs")}</h2>
           <button
             onClick={onClose}
             className="p-1.5 rounded-lg hover:bg-[#F4F7FC] text-[#6B7280] hover:text-[#0F2C59] transition-colors"
