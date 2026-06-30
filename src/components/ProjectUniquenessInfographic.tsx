@@ -16,40 +16,61 @@ const GRID_AREA_CLASS: Record<UniquenessCard["gridArea"], string> = {
 
 function CenterCircle({ topText, bottomText }: { topText: string; bottomText: string }) {
   const uid = useId().replace(/:/g, "");
+  const clipId = `uniqueness-clip-${uid}`;
   const topArcId = `uniqueness-top-arc-${uid}`;
   const bottomArcId = `uniqueness-bottom-arc-${uid}`;
+  const topRadius = 70;
+  const bottomRadius = 58;
 
   return (
     <div className={styles.centerGlow}>
       <div className={styles.centerCircle} aria-hidden="true">
-        <svg viewBox="-18 -18 276 276" className={styles.centerSvg} role="img">
+        <svg viewBox="0 0 240 240" className={styles.centerSvg} role="img">
+          <defs>
+            <clipPath id={clipId}>
+              <circle cx="120" cy="120" r="86" />
+            </clipPath>
+          </defs>
+
           <circle cx="120" cy="120" r="88" className={styles.centerDisc} />
 
-          <g className={styles.centerTextRing}>
-            <path
-              id={topArcId}
-              d="M 38 120 A 82 82 0 0 1 202 120"
-              fill="none"
-              aria-hidden="true"
-            />
-            <path
-              id={bottomArcId}
-              d="M 38 120 A 82 82 0 0 0 202 120"
-              fill="none"
-              aria-hidden="true"
-            />
+          <g clipPath={`url(#${clipId})`} className={styles.centerClipGroup}>
+            <g className={styles.centerTextRing}>
+              <path
+                id={topArcId}
+                d={`M ${120 - topRadius} 120 A ${topRadius} ${topRadius} 0 0 1 ${120 + topRadius} 120`}
+                fill="none"
+                aria-hidden="true"
+              />
+              <path
+                id={bottomArcId}
+                d={`M ${120 + bottomRadius} 120 A ${bottomRadius} ${bottomRadius} 0 0 1 ${120 - bottomRadius} 120`}
+                fill="none"
+                aria-hidden="true"
+              />
 
-            <text className={styles.centerTextTop} dominantBaseline="middle">
-              <textPath href={`#${topArcId}`} startOffset="50%" textAnchor="middle">
-                {topText}
-              </textPath>
-            </text>
+              <text className={styles.centerTextTop}>
+                <textPath
+                  href={`#${topArcId}`}
+                  startOffset="50%"
+                  textAnchor="middle"
+                  lengthAdjust="spacingAndGlyphs"
+                >
+                  {topText}
+                </textPath>
+              </text>
 
-            <text className={styles.centerTextBottom} dominantBaseline="middle">
-              <textPath href={`#${bottomArcId}`} startOffset="50%" textAnchor="middle">
-                {bottomText}
-              </textPath>
-            </text>
+              <text className={styles.centerTextBottom}>
+                <textPath
+                  href={`#${bottomArcId}`}
+                  startOffset="50%"
+                  textAnchor="middle"
+                  lengthAdjust="spacingAndGlyphs"
+                >
+                  {bottomText}
+                </textPath>
+              </text>
+            </g>
           </g>
         </svg>
       </div>

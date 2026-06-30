@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { ZoomIn } from "lucide-react";
+import { ZoomIn, ZoomOut } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 import { useAccordionEntrance } from "@/hooks/useAccordionEntrance";
 import ImageZoomLightbox from "@/components/ImageZoomLightbox";
@@ -56,6 +56,7 @@ export default function InfrastructureInfographic({
   const tourTimersRef = useRef<number[]>([]);
   const animateRef = useRef(false);
   const startTourRef = useRef<() => void>(() => {});
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
   const { visible: animate, cycle: animationCycle } = useAccordionEntrance(isActive);
   const [imageReady, setImageReady] = useState(false);
   const [tourActive, setTourActive] = useState(false);
@@ -66,6 +67,7 @@ export default function InfrastructureInfographic({
 
   const alt = t(infrastructureImage.altKey);
   const src = infrastructureImage.src;
+  const interactive = infrastructureImage.interactive !== false;
   const totalTourSteps = infrastructureIcons.length + infrastructureModules.length;
 
   const currentTourLabel = useMemo(() => {
@@ -97,6 +99,7 @@ export default function InfrastructureInfographic({
   }, []);
 
   const startTour = useCallback(() => {
+    if (!interactive) return;
     clearTourTimers();
     if (!animateRef.current) return;
 
@@ -143,7 +146,7 @@ export default function InfrastructureInfographic({
         if (animateRef.current) startTourRef.current();
       });
     });
-  }, [clearTourTimers, resetTour, totalTourSteps]);
+  }, [clearTourTimers, resetTour, totalTourSteps, interactive]);
 
   useEffect(() => {
     startTourRef.current = startTour;
@@ -155,11 +158,17 @@ export default function InfrastructureInfographic({
 
   const zoomLabels = {
     close: t("info_image_close"),
+    back: t("info_image_back_to_plans"),
+    returnOverview: t("info_image_return_overview"),
     zoomIn: t("info_image_zoom_in"),
     zoomOut: t("info_image_zoom_out"),
     reset: t("info_image_zoom_reset"),
     hint: t("info_image_zoom_controls"),
   };
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+  }, []);
 
   useEffect(() => {
     if (!animate) {
@@ -177,7 +186,7 @@ export default function InfrastructureInfographic({
     }, 0);
 
     const tourTimer = window.setTimeout(() => {
-      startTour();
+      if (interactive) startTour();
     }, IMAGE_ENTER_MS);
 
     return () => {
@@ -185,13 +194,13 @@ export default function InfrastructureInfographic({
       window.clearTimeout(tourTimer);
       clearTourTimers();
     };
-  }, [animate, animationCycle, startTour, resetTour, clearTourTimers]);
+  }, [animate, animationCycle, startTour, resetTour, clearTourTimers, interactive]);
 
   const showTourZoom = tourActive && tourStep > 0;
 
   return (
     <>
-      <div className={styles.card}>
+      <div className={styles.card} ref={scrollAnchorRef}>
         <div className={styles.infographicContainer}>
           <div
             key={animationCycle}
@@ -219,28 +228,30 @@ export default function InfrastructureInfographic({
               draggable={false}
             />
 
-            {infrastructureIcons.map((region, index) => (
-              <Hotspot
-                key={region.id}
-                region={region}
-                variant="icon"
-                active={activeIconIndex === index}
-              />
-            ))}
+            {interactive &&
+              infrastructureIcons.map((region, index) => (
+                <Hotspot
+                  key={region.id}
+                  region={region}
+                  variant="icon"
+                  active={activeIconIndex === index}
+                />
+              ))}
 
-            {infrastructureModules.map((region, index) => (
-              <Hotspot
-                key={region.id}
-                region={region}
-                variant="module"
-                active={activeModuleIndex === index}
-              />
-            ))}
+            {interactive &&
+              infrastructureModules.map((region, index) => (
+                <Hotspot
+                  key={region.id}
+                  region={region}
+                  variant="module"
+                  active={activeModuleIndex === index}
+                />
+              ))}
           </div>
         </div>
 
         <footer className={styles.cardFooter}>
-          {tourActive && tourStep > 0 && (
+          {interactive && tourActive && tourStep > 0 && (
             <div className={styles.tourInfo} aria-live="polite">
               <p className={styles.tourProgress}>
                 {t("infra_tour_progress")
@@ -254,7 +265,10 @@ export default function InfrastructureInfographic({
           )}
 
           <button type="button" className={styles.viewCloserBtn} onClick={openLightbox}>
-            <ZoomIn size={18} aria-hidden="true" />
+            <span className={styles.viewCloserIcons} aria-hidden="true">
+              <ZoomIn size={17} />
+              <ZoomOut size={17} />
+            </span>
             <span>
               <strong>{t("infra_view_closer")}</strong>
               <small>{t("infra_view_closer_hint")}</small>
@@ -273,7 +287,8 @@ export default function InfrastructureInfographic({
             height: infrastructureImage.height,
           }}
           labels={zoomLabels}
-          onClose={() => setLightboxOpen(false)}
+          restoreScrollRef={scrollAnchorRef}
+          onClose={closeLightbox}
         />
       )}
     </>

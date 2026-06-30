@@ -9,6 +9,19 @@ export const translations = {
     nav_team: "Команда",
     nav_about: "О проекте",
     nav_info: "Стратегические планы",
+    nav_observatories: "Радиоэкологические обсерватории",
+    nav_observatories_short: "Обсерватории",
+    observatories_lead:
+      "Обсерватория «Шаган» станет пятой международной радиоэкологической обсерваторией",
+    observatories_p1:
+      "В настоящее время в мире официально функционируют четыре международные радиоэкологические обсерватории, объединенные в сеть ALLIANCE Radioecological Observatories. Они расположены в Чернобыльской зоне отчуждения (Украина), префектуре Фукусима (Япония), Верхнесилезском угольном бассейне (Польша) и на территории объектов NORM в Бельгии. Эти уникальные исследовательские площадки используются для проведения международных научных исследований, подготовки специалистов и разработки современных подходов в области радиоэкологии.",
+    observatories_p2:
+      "Создаваемая Обсерватория «Шаган» станет пятой радиоэкологической обсерваторией мирового уровня и первой в Центральной Азии. Ее основная задача — проведение комплексных долгосрочных исследований по радиоэкологии, мониторингу окружающей среды, изучению миграции радионуклидов, оценке воздействия на экосистемы и развитию международного научного сотрудничества.",
+    observatories_p3:
+      "Создание Обсерватории «Шаган» позволит Казахстану войти в число стран, располагающих уникальной научной инфраструктурой мирового уровня в области радиоэкологии, а также расширит возможности для реализации международных исследовательских проектов, подготовки молодых ученых и обмена научными данными с ведущими мировыми научными центрами.",
+    observatories_more_title: "Другие международные радиоэкологические обсерватории",
+    observatories_more_desc:
+      "Более подробная информация о действующей международной сети ALLIANCE Radioecological Observatories, включая описание остальных четырех радиоэкологических обсерваторий, доступна на официальном сайте:",
     info_hero_title: "Стратегические планы развития проекта на период 2026–2030 года",
     info_placeholder: "Раздел в разработке. Здесь появятся планы и материалы на 2026–2030 гг.",
     info_back_home: "На главную страницу",
@@ -23,7 +36,7 @@ export const translations = {
     infra_reset: "Сбросить",
     infra_auto_hint: "Анимация запускается автоматически при открытии блока",
     infra_view_closer: "Рассмотреть ближе",
-    infra_view_closer_hint: "Увеличение, перемещение и детальный просмотр",
+    infra_view_closer_hint: "Увеличение и уменьшение, перемещение и детальный просмотр",
     infra_tour_progress: "Подсветка {current} / {total}",
     infra_icon_research: "Исследование",
     infra_icon_monitoring: "Мониторинг",
@@ -40,11 +53,15 @@ export const translations = {
     infra_module_8: "Пункт охраны и контроля доступа",
     info_image_zoom: "Увеличить изображение",
     info_image_zoom_hint: "Нажмите на изображение, чтобы открыть просмотр с приближением",
-    info_image_zoom_controls: "Колёсико мыши или кнопки ± для приближения · перетаскивание для перемещения · двойной клик — сброс",
+    info_image_zoom_controls: "Колёсико мыши или кнопки ± для приближения · перетаскивание для перемещения · «Сброс» или двойной клик — вернуть масштаб · «Вернуться» — закрыть просмотр",
     info_image_zoom_in: "Приблизить",
     info_image_zoom_out: "Отдалить",
     info_image_zoom_reset: "Сбросить масштаб",
     info_image_close: "Закрыть",
+    info_image_back: "Вернуться",
+    info_image_back_to_plans: "К стратегическим планам",
+    info_image_back_to_about: "К разделу «О проекте»",
+    info_image_return_overview: "Исходный вид",
     info_plan2_title: "Уникальность проекта",
     info_plan2_desc: "",
     uniqueness_circle_text_top: "Уникальная география",
@@ -100,9 +117,6 @@ export const translations = {
     lab_stage_evaporation: "Выпаривание",
     lab_stage_radiometry: "Экспресс-радиометрия",
     lab_stage_storage: "Временное хранение",
-    info_plan6_title: "Радиоэкологические обсерватории",
-    info_plan6_desc: "Международная сеть радиоэкологических обсерваторий для координированных полевых исследований.",
-    info_plan6_link: "Radioecology observatories | UK Centre for Ecology & Hydrology",
     nav_partners: "Партнёры",
     nav_about_lab: "О лаборатории",
     nav_about_docs: "Документы",
@@ -176,6 +190,12 @@ export const translations = {
     team_modal_bio: "Биография и область ответственности",
     team_modal_role: "В рамках проекта",
     team_modal_pubs: "Избранные публикации (Scopus / WoS)",
+
+    // Testimonials
+    testimonials_label: "Международное признание",
+    testimonials_heading: "Отзывы и пожелания коллег",
+    testimonials_read_more: "Читать полностью →",
+    testimonials_close: "Закрыть",
 
     // About
     about_label: "Научный лонгрид",
@@ -263,6 +283,19 @@ export const translations = {
     nav_team: "Команда",
     nav_about: "Жоба туралы",
     nav_info: "Стратегиялық жоспарлар",
+    nav_observatories: "Радиоэкологиялық обсерваториялар",
+    nav_observatories_short: "Обсерваториялар",
+    observatories_lead:
+      "«Шаған» обсерваториясы бесінші халықаралық радиоэкологиялық обсерваторияға айналады",
+    observatories_p1:
+      "Қазіргі уақытта әлемде ALLIANCE Radioecological Observatories желісіне біріккен төрт халықаралық радиоэкологиялық обсерватория ресми түрде жұмыс істейді. Олар Чернобыль аймағында (Украина), Фукусима префектурасында (Жапония), Жоғарғы Силезия көмір бассейнінде (Польша) және Бельгиядағы NORM объектілері аумағында орналасқан. Бұл бірегей зерттеу алаңдары халықаралық ғылыми зерттеулер жүргізуге, мамандар дайындауға және радиоэкология саласындағы заманауи тәсілдерді әзірлеуге пайдаланылады.",
+    observatories_p2:
+      "Құрылатын «Шаған» обсерваториясы әлемдік деңгейдегі бесінші радиоэкологиялық обсерватория және Орталық Азиядағы біріншісі болады. Оның негізгі міндеті — радиоэкология, қоршаған ортаны мониторингілеу, радионуклидтердің миграциясын зерттеу, экожүйелерге әсерін бағалау және халықаралық ғылыми ынтымақтастықты дамыту бойынша кешенді ұзақ мерзімді зерттеулер жүргізу.",
+    observatories_p3:
+      "«Шаған» обсерваториясын құру Қазақстанға радиоэкология саласында әлемдік деңгейдегі бірегей ғылыми инфрақұрылымға ие елдер қатарына кіру мүмкіндігін береді, сондай-ақ халықаралық зерттеу жобаларын іске асыруға, жас ғалымдарды дайындауға және жетекші әлемдік ғылыми орталықтармен ғылыми деректер алмасу мүмкіндіктерін кеңейтеді.",
+    observatories_more_title: "Басқа халықаралық радиоэкологиялық обсерваториялар",
+    observatories_more_desc:
+      "Қалған төрт радиоэкологиялық обсерваторияның сипаттамасын қоса алғанда, ALLIANCE Radioecological Observatories халықаралық желісі туралы толығырақ ақпарат ресми сайтта қолжетімді:",
     info_hero_title: "2026–2030 жылдарға арналған жобаның стратегиялық даму жоспарлары",
     info_placeholder: "Бөлім дайындалуда. Мұнда 2026–2030 жылдарға арналған жоспарлар мен материалдар пайда болады.",
     info_back_home: "Басты бетке оралу",
@@ -277,7 +310,7 @@ export const translations = {
     infra_reset: "Қалпына келтіру",
     infra_auto_hint: "Блок ашылғанда анимация автоматты түрде іске қосылады",
     infra_view_closer: "Жақыннан қарау",
-    infra_view_closer_hint: "Үлкейту, жылжыту және егжей-тегжейлі қарау",
+    infra_view_closer_hint: "Үлкейту және кішірейту, жылжыту және егжей-тегжейлі қарау",
     infra_tour_progress: "Жарықтандыру {current} / {total}",
     infra_icon_research: "Зерттеу",
     infra_icon_monitoring: "Мониторинг",
@@ -294,11 +327,15 @@ export const translations = {
     infra_module_8: "Күзет және кіру бақылау пункті",
     info_image_zoom: "Суретті үлкейту",
     info_image_zoom_hint: "Жақындату режимін ашу үшін суретті басыңыз",
-    info_image_zoom_controls: "Жақындату үшін тышқан дөңгелегі немесе ± түймелері · жылжыту · екі рет басу — қалпына келтіру",
+    info_image_zoom_controls: "Жақындату үшін тышқан дөңгелегі немесе ± түймелері · жылжыту · «Қалпына келтіру» немесе екі рет басу — масштаб · «Қайту» — жабу",
     info_image_zoom_in: "Жақындату",
     info_image_zoom_out: "Алыстату",
     info_image_zoom_reset: "Масштабты қалпына келтіру",
     info_image_close: "Жабу",
+    info_image_back: "Қайту",
+    info_image_back_to_plans: "Стратегиялық жоспарларға",
+    info_image_back_to_about: "«Жоба туралы» бөліміне",
+    info_image_return_overview: "Бастапқы көрініс",
     info_plan2_title: "Жобаның бірегейлігі",
     info_plan2_desc: "",
     uniqueness_circle_text_top: "Бірегей география",
@@ -354,9 +391,6 @@ export const translations = {
     lab_stage_evaporation: "Буарлау",
     lab_stage_radiometry: "Экспресс-радиометрия",
     lab_stage_storage: "Уақытша сақтау",
-    info_plan6_title: "Радиоэкологиялық обсерваториялар",
-    info_plan6_desc: "Үйлестірілген далалық зерттеулер үшін халықаралық радиоэкологиялық обсерваториялар желісі.",
-    info_plan6_link: "Radioecology observatories | UK Centre for Ecology & Hydrology",
     nav_partners: "Серіктестер",
     nav_about_lab: "Зертхана туралы",
     nav_about_docs: "Құжаттар",
@@ -430,6 +464,12 @@ export const translations = {
     team_modal_bio: "Өмірбаяны және жауапкершілік саласы",
     team_modal_role: "Жоба шеңберінде",
     team_modal_pubs: "Таңдаулы басылымдар (Scopus / WoS)",
+
+    // Testimonials
+    testimonials_label: "Халықаралық мойындау",
+    testimonials_heading: "Әріптестердің пікірі мен тілектері",
+    testimonials_read_more: "Толығырақ оқу →",
+    testimonials_close: "Жабу",
 
     // About
     about_label: "Ғылыми мақала",
@@ -517,6 +557,19 @@ export const translations = {
     nav_team: "Team",
     nav_about: "About",
     nav_info: "Strategic plans",
+    nav_observatories: "Radioecological observatories",
+    nav_observatories_short: "Observatories",
+    observatories_lead:
+      "The Shagan Observatory will become the fifth international radioecological observatory",
+    observatories_p1:
+      "Four international radioecological observatories currently operate officially worldwide as part of the ALLIANCE Radioecological Observatories network. They are located in the Chernobyl Exclusion Zone (Ukraine), Fukushima Prefecture (Japan), the Upper Silesian Coal Basin (Poland), and at NORM sites in Belgium. These unique research platforms are used for international scientific studies, specialist training, and the development of modern approaches in radioecology.",
+    observatories_p2:
+      "The Shagan Observatory under development will become the fifth world-class radioecological observatory and the first in Central Asia. Its main mission is to conduct comprehensive long-term research in radioecology, environmental monitoring, radionuclide migration, ecosystem impact assessment, and the development of international scientific cooperation.",
+    observatories_p3:
+      "Establishing the Shagan Observatory will enable Kazakhstan to join the group of countries with unique world-class scientific infrastructure in radioecology, and will expand opportunities for international research projects, training of young scientists, and scientific data exchange with leading global research centres.",
+    observatories_more_title: "Other international radioecological observatories",
+    observatories_more_desc:
+      "More detailed information about the active international ALLIANCE Radioecological Observatories network, including descriptions of the other four radioecological observatories, is available on the official website:",
     info_hero_title: "Strategic project development plans for the period 2026–2030",
     info_placeholder: "This section is under development. Plans and materials for 2026–2030 will appear here.",
     info_back_home: "Back to home page",
@@ -531,7 +584,7 @@ export const translations = {
     infra_reset: "Reset",
     infra_auto_hint: "Animation starts automatically when the block opens",
     infra_view_closer: "View closer",
-    infra_view_closer_hint: "Zoom, pan, and inspect in detail",
+    infra_view_closer_hint: "Zoom in and out, pan, and inspect in detail",
     infra_tour_progress: "Highlight {current} / {total}",
     infra_icon_research: "Research",
     infra_icon_monitoring: "Monitoring",
@@ -548,11 +601,15 @@ export const translations = {
     infra_module_8: "Security and access control point",
     info_image_zoom: "Enlarge image",
     info_image_zoom_hint: "Click the image to open zoom view",
-    info_image_zoom_controls: "Mouse wheel or ± buttons to zoom · drag to move · double-click to reset",
+    info_image_zoom_controls: "Mouse wheel or ± to zoom · drag to move · Reset or double-click to restore scale · Back to close",
     info_image_zoom_in: "Zoom in",
     info_image_zoom_out: "Zoom out",
     info_image_zoom_reset: "Reset zoom",
     info_image_close: "Close",
+    info_image_back: "Back",
+    info_image_back_to_plans: "Back to strategic plans",
+    info_image_back_to_about: "Back to About",
+    info_image_return_overview: "Original view",
     info_plan2_title: "Project uniqueness",
     info_plan2_desc: "",
     uniqueness_circle_text_top: "Unique geography",
@@ -608,9 +665,6 @@ export const translations = {
     lab_stage_evaporation: "Evaporation",
     lab_stage_radiometry: "Express radiometry",
     lab_stage_storage: "Temporary storage",
-    info_plan6_title: "Radioecological observatories",
-    info_plan6_desc: "An international network of radioecological observatories for coordinated field research.",
-    info_plan6_link: "Radioecology observatories | UK Centre for Ecology & Hydrology",
     nav_partners: "Partners",
     nav_about_lab: "About the Laboratory",
     nav_about_docs: "Documents",
@@ -684,6 +738,12 @@ export const translations = {
     team_modal_bio: "Biography & Area of Responsibility",
     team_modal_role: "Role in the Project",
     team_modal_pubs: "Selected Publications (Scopus / WoS)",
+
+    // Testimonials
+    testimonials_label: "International Recognition",
+    testimonials_heading: "Reviews and Wishes from Colleagues",
+    testimonials_read_more: "Read full text →",
+    testimonials_close: "Close",
 
     // About
     about_label: "Scientific Overview",

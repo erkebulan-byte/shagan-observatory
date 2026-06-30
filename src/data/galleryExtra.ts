@@ -51,5 +51,31 @@ export function extraGalleryImages(startId: number): GalleryImage[] {
     },
   );
 
-  return [...foto1, ...foto3];
+  const FOTO14_INDICES = Array.from({ length: 54 }, (_, i) => i + 1);
+  const foto14 = buildFolderGallery(
+    startId + foto1.length + foto3.length,
+    "foto14",
+    "foto14",
+    FOTO14_INDICES,
+    {
+      ru: "Полевые работы и мониторинг на территории обсерватории «Шаган»",
+      kz: "«Шаған» обсерваториясы аумағындағы далалық жұмыстар мен мониторинг",
+      en: "Field work and monitoring at the Shagan Observatory site",
+    },
+  );
+
+  const FOTO15_INDICES = Array.from({ length: 6 }, (_, i) => i + 1);
+  const foto15 = buildFolderGallery(
+    startId + foto1.length + foto3.length + foto14.length,
+    "foto15",
+    "foto15",
+    FOTO15_INDICES,
+    {
+      ru: "Лабораторный вагон проекта «Шаган»",
+      kz: "«Шаған» жобасының зертханалық вагоны",
+      en: "Project Shagan laboratory wagon",
+    },
+  );
+
+  return [...foto1, ...foto3, ...foto14, ...foto15];
 }

@@ -14,13 +14,14 @@ export type InfrastructureHotspot = RegionRect & {
 };
 
 export const infrastructureImage = {
-  src: "/info/infrastructure.png",
-  width: 1536,
-  height: 1024,
+  src: "/info/infrastructure-photo.png",
+  width: 1013,
+  height: 297,
   altKey: "info_plan1_image_alt" as const,
+  interactive: false,
 };
 
-/** Hotspots for tour highlight — aligned to infrastructure.png (1536×1024) */
+/** Hotspots for tour highlight — aligned to infrastructure diagram (1536×1024) */
 export const infrastructureIcons: InfrastructureHotspot[] = [
   { id: "icon-1", l: 2.2, t: 27.8, w: 6.8, h: 7.2, labelKey: "infra_icon_research" },
   { id: "icon-2", l: 10.2, t: 27.8, w: 6.8, h: 7.2, labelKey: "infra_icon_monitoring" },

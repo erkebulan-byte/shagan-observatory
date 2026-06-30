@@ -82,20 +82,20 @@ export default function Program() {
           <div className="flex flex-col gap-4 lg:gap-6">
             <div className="rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
               <Image
-                src="/gallery/gallery1.jpg"
+                src="/program/program-photo1.png"
                 alt={t("program_img_caption")}
-                width={960}
-                height={1280}
+                width={1792}
+                height={2390}
                 className="w-full h-auto"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
             <div className="rounded-2xl overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
               <Image
-                src="/gallery/gallery4.jpg"
+                src="/program/program-photo2.jpg"
                 alt={t("program_img_sub")}
-                width={1280}
-                height={960}
+                width={1013}
+                height={297}
                 className="w-full h-auto"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />

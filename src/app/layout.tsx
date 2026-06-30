@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/og-image.png",
+        width: 1792,
+        height: 2390,
         alt: "Shagan Observatory — Радиоэкологический мониторинг реки Шаган",
       },
     ],
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "Shagan Observatory | Радиоэкологический мониторинг бассейна реки Шаган",
     description:
       "Научный проект по радиоэкологическому мониторингу бассейна реки Шаган. Проект АР22783154, Республика Казахстан.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   category: "science",
 };
@@ -90,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${inter.variable} h-full antialiased`}>
+    <html lang="ru" data-scroll-behavior="smooth" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-[#1E3E62]">
         <LangProvider>{children}</LangProvider>
       </body>

@@ -4,6 +4,7 @@ import Program from "@/components/Program";
 import News from "@/components/News";
 import Gallery from "@/components/Gallery";
 import Team from "@/components/Team";
+import Testimonials from "@/components/Testimonials";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Divider from "@/components/Divider";
@@ -22,6 +23,8 @@ export default function Home() {
         <Gallery />
         <Divider />
         <Team />
+        <Divider />
+        <Testimonials />
         <Divider />
         <About />
       </main>

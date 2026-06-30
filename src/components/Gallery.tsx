@@ -199,39 +199,42 @@ export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { t, lang } = useLang();
 
-  const previewImages = galleryImages.slice(0, 4);
+  const previewImages = galleryImages.slice(0, 6);
 
   return (
-    <section id="gallery" className="py-20 bg-[#F4F7FC]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+    <section id="gallery" className="py-20 bg-[#F4F7FC] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <p className="text-[#4A90E2] text-xs font-semibold uppercase tracking-widest mb-3">
           {t("gallery_label")}
         </p>
         <h2 className="text-[#0F2C59] font-bold text-2xl sm:text-3xl mb-2">
           {t("gallery_heading")}
         </h2>
-        <p className="text-[#6B7280] text-sm mb-8">
+        <p className="text-[#6B7280] text-sm">
           {t("gallery_desc")}
         </p>
+      </div>
 
-        {!isExpanded ? (
-          <div className="bg-white border border-[#E2EAF4] rounded-2xl p-6 sm:p-8">
-            <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-xl mb-6">
-              {previewImages.map((img) => (
-                <div
-                  key={img.id}
-                  className="relative aspect-square rounded-lg overflow-hidden"
-                >
-                  <Image
-                    src={img.src}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="120px"
-                  />
-                </div>
-              ))}
-            </div>
+      {!isExpanded ? (
+        <div className="w-full">
+          <div className="grid grid-cols-6 gap-1 w-full">
+            {previewImages.map((img) => (
+              <div
+                key={img.id}
+                className="relative aspect-[4/3] overflow-hidden"
+              >
+                <Image
+                  src={img.src}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="16vw"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             <button
               type="button"
               onClick={() => setIsExpanded(true)}
@@ -245,51 +248,52 @@ export default function Gallery() {
               </span>
             </button>
           </div>
-        ) : (
-          <>
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-              <p className="text-[#0F2C59] font-semibold text-sm sm:text-base">
-                {galleryImages.length} {t("gallery_photos_count")}
-              </p>
-              <button
-                type="button"
-                onClick={() => setIsExpanded(false)}
-                aria-expanded={true}
-                className="inline-flex items-center gap-2 text-[#4A90E2] hover:text-[#0F2C59] font-semibold text-sm transition-colors duration-200"
-              >
-                <ChevronUp size={18} />
-                {t("gallery_hide")}
-              </button>
-            </div>
+        </div>
+      ) : (
+        <div className="w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3 mb-4">
+            <p className="text-[#0F2C59] font-semibold text-sm sm:text-base">
+              {galleryImages.length} {t("gallery_photos_count")}
+            </p>
+            <button
+              type="button"
+              onClick={() => setIsExpanded(false)}
+              aria-expanded={true}
+              className="inline-flex items-center gap-2 text-[#4A90E2] hover:text-[#0F2C59] font-semibold text-sm transition-colors duration-200"
+            >
+              <ChevronUp size={18} />
+              {t("gallery_hide")}
+            </button>
+          </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-              {galleryImages.map((img, idx) => (
-                <button
-                  key={img.id}
-                  type="button"
-                  className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:ring-offset-2"
-                  onClick={() => setLightboxIndex(idx)}
-                  aria-label={`${t("gallery_open")}: ${getImageText(img, lang, "alt")}`}
-                >
-                  <Image
-                    src={img.src}
-                    alt={getImageText(img, lang, "alt")}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          <div className="grid grid-cols-6 gap-1 w-full">
+            {galleryImages.map((img, idx) => (
+              <button
+                key={img.id}
+                type="button"
+                className="relative aspect-square overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#4A90E2]"
+                onClick={() => setLightboxIndex(idx)}
+                aria-label={`${t("gallery_open")}: ${getImageText(img, lang, "alt")}`}
+              >
+                <Image
+                  src={img.src}
+                  alt={getImageText(img, lang, "alt")}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="16vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
+                  <ZoomIn
+                    size={28}
+                    className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
-                    <ZoomIn
-                      size={28}
-                      className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
-                    />
-                  </div>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
 
       {lightboxIndex !== null && (
         <GalleryLightbox
@@ -299,6 +303,6 @@ export default function Gallery() {
           onClose={() => setLightboxIndex(null)}
         />
       )}
-    </section>
+    </>
   );
 }

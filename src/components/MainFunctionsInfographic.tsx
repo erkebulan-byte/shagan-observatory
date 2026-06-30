@@ -42,6 +42,21 @@ function GlowRing({ active }: { active: boolean }) {
   );
 }
 
+function splitOrbitTitle(title: string): string[] {
+  const words = title.trim().split(/\s+/);
+  if (words.length <= 1) return words;
+
+  const longestWord = Math.max(...words.map((word) => word.length));
+  if (words.length === 2 && title.length <= 18 && longestWord <= 12) {
+    return [title];
+  }
+
+  if (words.length === 2) return words;
+
+  const mid = Math.ceil(words.length / 2);
+  return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
+}
+
 function OrbitCard({
   card,
   visible,
@@ -59,6 +74,9 @@ function OrbitCard({
 }) {
   const { t } = useLang();
   const pos = polarToPercent(card.angle, CARD_RADIUS);
+  const title = t(card.titleKey);
+  const titleLines = splitOrbitTitle(title);
+  const longestLine = Math.max(...titleLines.map((line) => line.length));
 
   return (
     <article
@@ -79,14 +97,28 @@ function OrbitCard({
       onFocus={onHover}
       onBlur={onLeave}
       tabIndex={0}
-      aria-label={t(card.titleKey)}
+      aria-label={title}
     >
       <GlowRing active={isSequenceGlow} />
       <div className={styles.orbitInner}>
         <div className={styles.orbitIconBadge}>
           <div className={styles.orbitIcon}>{mainFunctionIcons[card.id]("")}</div>
         </div>
-        <h4 className={styles.orbitTitle}>{t(card.titleKey)}</h4>
+        <h4
+          className={[
+            styles.orbitTitle,
+            longestLine > 14 ? styles.orbitTitleCompact : "",
+            longestLine > 18 ? styles.orbitTitleTight : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          {titleLines.map((line) => (
+            <span key={line} className={styles.orbitTitleLine}>
+              {line}
+            </span>
+          ))}
+        </h4>
       </div>
     </article>
   );

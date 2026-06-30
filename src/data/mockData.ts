@@ -1,4 +1,25 @@
 // ─── NEWS DATA ───────────────────────────────────────────────────────────────
+export interface NewsHighlight {
+  insertAfterParagraph: number;
+  heading: string;
+  heading_kz?: string;
+  heading_en?: string;
+  body: string;
+  body_kz?: string;
+  body_en?: string;
+  figure: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    alt_kz?: string;
+    alt_en?: string;
+    caption: string;
+    caption_kz?: string;
+    caption_en?: string;
+  };
+}
+
 export interface NewsItem {
   id: number;
   date: string;
@@ -15,9 +36,59 @@ export interface NewsItem {
   fullText_en?: string;
   previewImages: string[];
   galleryImages: string[];
+  highlight?: NewsHighlight;
 }
 
 export const newsData: NewsItem[] = [
+  {
+    id: 2,
+    date: "30 июня 2026",
+    date_kz: "2026 жылғы 30 маусым",
+    date_en: "June 30, 2026",
+    title:
+      "В Казахстане впервые состоялся выпуск магистров по программе «Радиационная безопасность»",
+    title_kz:
+      "Қазақстанда «Радиациялық қауіпсіздік» бағдарламасы бойынша магистрлердің алғашқы түлегі өтті",
+    title_en:
+      "Kazakhstan holds its first graduation of master's students in the Radiation Safety programme",
+    preview:
+      "В Республике Казахстан состоялся первый выпуск магистров по образовательной программе «Радиационная безопасность», реализуемой совместно Евразийским национальным университетом имени Л.Н. Гумилёва и АО «Парк ядерных технологий». Это первая в Казахстане магистерская программа по данному направлению подготовки, созданная для подготовки специалистов в области радиационной безопасности, радиационного контроля и безопасного использования источников ионизирующего излучения.",
+    preview_kz:
+      "Қазақстан Республикасында Л.Н. Гумилёв атындағы Еуразия ұлттық университеті мен «Ядролық технологиялар паркі» АҚ бірлесіп іске асыратын «Радиациялық қауіпсіздік» білім беру бағдарламасы бойынша магистрлердің алғашқы түлегі өтті. Бұл — радиациялық қауіпсіздік, радиациялық бақылау және иондаушы сәулелену көздерін қауіпсіз пайдалану саласында мамандар дайындауға арналған дайындық бағыты бойынша Қазақстандағы алғашқы магистрлік бағдарлама.",
+    preview_en:
+      "The Republic of Kazakhstan held its first graduation of master's students in the Radiation Safety educational programme, jointly delivered by the L.N. Gumilyov Eurasian National University and JSC Nuclear Technology Park. This is the first master's programme in Kazakhstan in this field of study, created to train specialists in radiation safety, radiation control, and the safe use of ionising radiation sources.",
+    fullText:
+      "В Республике Казахстан состоялся первый выпуск магистров по образовательной программе «Радиационная безопасность», реализуемой совместно Евразийским национальным университетом имени Л.Н. Гумилёва и АО «Парк ядерных технологий».\n\nЭто первая в Казахстане магистерская программа по данному направлению подготовки, созданная для подготовки специалистов в области радиационной безопасности, радиационного контроля и безопасного использования источников ионизирующего излучения.\n\nПрактическая подготовка магистрантов проходила на базе АО «Парк ядерных технологий», где они получили опыт работы с современным оборудованием и освоили методы радиационного контроля, дозиметрии и мониторинга.\n\nПервый выпуск программы стал важным событием для отечественной атомной отрасли и системы подготовки кадров. Выпускники смогут применять полученные знания в научных организациях, промышленности, медицине и государственных органах, обеспечивая высокий уровень радиационной безопасности в Республике Казахстан.\n\nПоздравляем выпускников с успешным окончанием обучения и желаем профессиональных успехов!",
+    fullText_kz:
+      "Қазақстан Республикасында Л.Н. Гумилёв атындағы Еуразия ұлттық университеті мен «Ядролық технологиялар паркі» АҚ бірлесіп іске асыратын «Радиациялық қауіпсіздік» білім беру бағдарламасы бойынша магистрлердің алғашқы түлегі өтті.\n\nБұл — радиациялық қауіпсіздік, радиациялық бақылау және иондаушы сәулелену көздерін қауіпсіз пайдалану саласында мамандар дайындауға арналған дайындық бағыты бойынша Қазақстандағы алғашқы магистрлік бағдарлама.\n\nМагистранттардың практикалық дайындығы «Ядролық технологиялар паркі» АҚ базасында өтті, онда олар заманауи жабдықпен жұмыс істеу тәжірибесін алды және радиациялық бақылау, дозиметрия және мониторинг әдістерін меңгерді.\n\nБағдарламаның алғашқы түлегі отандық атом саласы мен кадр дайындау жүйесі үшін маңызды оқиғаға айналды. Түлектер алған білімдерін ғылыми ұйымдарда, өнеркәсіпте, медицинада және мемлекеттік органдарда қолдана отырып, Қазақстан Республикасында радиациялық қауіпсіздіктің жоғары деңгейін қамтамасыз етеді.\n\nТүлектерді оқуды сәтті аяқтағанымен құттықтаймыз және кәсіби табыстар тілейміз!",
+    fullText_en:
+      "The Republic of Kazakhstan held its first graduation of master's students in the Radiation Safety educational programme, jointly delivered by the L.N. Gumilyov Eurasian National University and JSC Nuclear Technology Park.\n\nThis is the first master's programme in Kazakhstan in this field of study, created to train specialists in radiation safety, radiation control, and the safe use of ionising radiation sources.\n\nPractical training for the master's students took place at JSC Nuclear Technology Park, where they gained experience working with modern equipment and mastered methods of radiation control, dosimetry, and monitoring.\n\nThe programme's first graduation became an important event for the domestic nuclear industry and the personnel training system. Graduates will be able to apply their knowledge in research organisations, industry, medicine, and government agencies, ensuring a high level of radiation safety in the Republic of Kazakhstan.\n\nWe congratulate the graduates on successfully completing their studies and wish them professional success!",
+    previewImages: ["/news/masters-award.jpeg"],
+    galleryImages: [],
+    highlight: {
+      insertAfterParagraph: 2,
+      heading: "Научное достижение выпускника",
+      heading_kz: "Түлектің ғылыми жетістігі",
+      heading_en: "Graduate's scientific achievement",
+      body:
+        "Особым достижением первого выпуска стала победа магистранта **Байғазы Сымбата**, который **занял I место** на научной конференции с докладом на тему:\n\n**«Оценка уровня радиационной нагрузки на жителей и работников сельскохозяйственной отрасли в зоне исследования реки Шаган»**.\n\nРабота получила высокую оценку экспертной комиссии за актуальность исследования, научную новизну и практическую значимость в области радиоэкологии и радиационной безопасности.",
+      body_kz:
+        "Алғашқы түліктің ерекше жетістігі — магистрант **Байғазы Сымбаттың** ғылыми конференцияда **I орын** иеленуі болды. Ол **«Шаған өзені зерттеу аймағындағы тұрғындар мен ауыл шаруашылығы саласы қызметкерлерінің радиациялық жүктеме деңгейін бағалау»** тақырыбында баяндама жасады.\n\nЖұмыс зерттеудің өзектілігі, ғылыми жаңалығы және радиоэкология мен радиациялық қауіпсіздік саласындағы практикалық маңыздылығы үшін сараптама комиссиясынан жоғары баға алды.",
+      body_en:
+        "A special achievement of the first graduating class was the victory of master's student **Sumbat Baigazy**, who **took 1st place** at a scientific conference with a presentation on:\n\n**«Assessment of radiation exposure levels for residents and agricultural workers in the Shagan River research area»**.\n\nThe work received high praise from the expert panel for the relevance of the research, its scientific novelty, and its practical significance in radioecology and radiation safety.",
+      figure: {
+        src: "/news/masters-award.jpeg",
+        width: 895,
+        height: 1280,
+        alt: "Вручение грамоты магистранту Байғазы Сымбат",
+        alt_kz: "Магистрант Байғазы Сымбатқа грамота табысталу",
+        alt_en: "Certificate presentation to master's student Sumbat Baigazy",
+        caption: "Байғазы Сымбат — победитель научной конференции, I место.",
+        caption_kz: "Байғазы Сымбат — ғылыми конференцияның жеңімпазы, I орын.",
+        caption_en: "Sumbat Baigazy — winner of the scientific conference, 1st place.",
+      },
+    },
+  },
   {
     id: 1,
     date: "6 октября 2025",

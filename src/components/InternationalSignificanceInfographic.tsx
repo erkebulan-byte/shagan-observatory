@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLang } from "@/context/LangContext";
 import { useAccordionEntrance } from "@/hooks/useAccordionEntrance";
 import {
+  buildSignificanceConnectorPath,
   significanceCards,
   significanceCenterImage,
   type SignificanceCard,
@@ -26,9 +27,8 @@ const CARD_ENTER_CLASS: Record<SignificanceCard["position"], string> = {
 };
 
 /** Stagger between cards (seconds) */
-const CARD_STAGGER_S = 0.125;
-const CARD_DURATION_S = 0.9;
-const CONNECTOR_BASE_DELAY_S = CARD_DURATION_S + CARD_STAGGER_S * 3 + 0.15;
+const CARD_STAGGER_S = 0.14;
+const CONNECTOR_BASE_DELAY_S = 0.72;
 
 const CARD_ENTRANCE_ORDER: SignificanceCard["position"][] = [
   "top-left",
@@ -39,7 +39,7 @@ const CARD_ENTRANCE_ORDER: SignificanceCard["position"][] = [
 
 const CARD_ENTRANCE_DELAY: Record<SignificanceCard["position"], number> =
   Object.fromEntries(
-    CARD_ENTRANCE_ORDER.map((position, index) => [position, index * CARD_STAGGER_S])
+    CARD_ENTRANCE_ORDER.map((position, index) => [position, 0.28 + index * CARD_STAGGER_S])
   ) as Record<SignificanceCard["position"], number>;
 
 const MOBILE_ORDER_CLASS: Record<SignificanceCard["position"], string> = {
@@ -139,7 +139,8 @@ export default function InternationalSignificanceInfographic({
           {significanceCards.map((card, index) => (
             <path
               key={card.id}
-              d={card.connectorPath}
+              d={buildSignificanceConnectorPath(card.position)}
+              pathLength={100}
               className={[
                 styles.connectorPath,
                 visible ? styles.connectorVisible : "",
@@ -148,7 +149,7 @@ export default function InternationalSignificanceInfographic({
                 .filter(Boolean)
                 .join(" ")}
               style={{
-                animationDelay: `${CONNECTOR_BASE_DELAY_S + index * 0.1}s`,
+                animationDelay: `${CONNECTOR_BASE_DELAY_S + index * 0.12}s`,
               }}
             />
           ))}

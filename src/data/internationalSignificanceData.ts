@@ -20,9 +20,25 @@ export type SignificanceCard = {
     | "intl_sig_data_desc";
   position: SignificanceCardPosition;
   slideFrom: "left" | "right";
-  /** SVG connector path (viewBox 0 0 100 100) */
-  connectorPath: string;
 };
+
+/** Anchor points in SVG viewBox 0 0 100 100 (image edge → card center) */
+export const significanceConnectorAnchors: Record<
+  SignificanceCardPosition,
+  { imageX: number; imageY: number; cardX: number; cardY: number }
+> = {
+  "top-left": { imageX: 41, imageY: 36, cardX: 16, cardY: 18 },
+  "bottom-left": { imageX: 41, imageY: 64, cardX: 16, cardY: 82 },
+  "top-right": { imageX: 59, imageY: 36, cardX: 84, cardY: 18 },
+  "bottom-right": { imageX: 59, imageY: 64, cardX: 84, cardY: 82 },
+};
+
+export function buildSignificanceConnectorPath(position: SignificanceCardPosition): string {
+  const { imageX, imageY, cardX, cardY } = significanceConnectorAnchors[position];
+  const ctrlX = imageX + (cardX - imageX) * 0.45;
+  const ctrlY = imageY + (cardY - imageY) * 0.45;
+  return `M ${imageX} ${imageY} Q ${ctrlX} ${ctrlY} ${cardX} ${cardY}`;
+}
 
 export const significanceCenterImage = {
   src: "/info/infrastructure.png",
@@ -38,7 +54,6 @@ export const significanceCards: SignificanceCard[] = [
     descKey: "intl_sig_audience_desc",
     position: "top-left",
     slideFrom: "left",
-    connectorPath: "M 28 24 Q 34 38 42 46",
   },
   {
     id: "field",
@@ -46,7 +61,6 @@ export const significanceCards: SignificanceCard[] = [
     descKey: "intl_sig_field_desc",
     position: "bottom-left",
     slideFrom: "left",
-    connectorPath: "M 28 76 Q 34 62 42 54",
   },
   {
     id: "logistics",
@@ -54,7 +68,6 @@ export const significanceCards: SignificanceCard[] = [
     descKey: "intl_sig_logistics_desc",
     position: "top-right",
     slideFrom: "right",
-    connectorPath: "M 72 24 Q 66 38 58 46",
   },
   {
     id: "data",
@@ -62,6 +75,5 @@ export const significanceCards: SignificanceCard[] = [
     descKey: "intl_sig_data_desc",
     position: "bottom-right",
     slideFrom: "right",
-    connectorPath: "M 72 76 Q 66 62 58 54",
   },
 ];

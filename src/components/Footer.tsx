@@ -34,7 +34,7 @@ export default function Footer() {
       {/* Partners section */}
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <p className="text-[#63B3ED] text-xs font-semibold uppercase tracking-widest mb-6 text-center sm:text-left">
+          <p className="text-[#63B3ED] text-sm sm:text-base font-semibold uppercase tracking-widest mb-6 text-center sm:text-left">
             {t("footer_partners_label")}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -42,10 +42,10 @@ export default function Footer() {
               <a
                 key={p.name}
                 href={p.url}
-                className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#4A90E2]/50 rounded-xl px-5 py-4 transition-all duration-200 group"
+                className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#4A90E2]/50 rounded-xl px-5 py-5 sm:py-6 transition-all duration-200 group"
               >
-                <div className="w-2 h-2 rounded-full bg-[#4A90E2] flex-shrink-0" />
-                <p className="text-white/80 group-hover:text-white text-sm font-medium leading-snug transition-colors">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#4A90E2] flex-shrink-0" />
+                <p className="text-white/80 group-hover:text-white text-base sm:text-lg font-semibold leading-snug transition-colors">
                   {p.name}
                 </p>
               </a>

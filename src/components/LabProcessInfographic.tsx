@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { useLang } from "@/context/LangContext";
 import ImageZoomLightbox from "@/components/ImageZoomLightbox";
 import { getStagePhotos, labProcessStages } from "@/data/labProcessData";
@@ -47,6 +47,7 @@ function StageChevronShape({
 export default function LabProcessInfographic() {
   const { t } = useLang();
   const [activeStage, setActiveStage] = useState(0);
+  const [photoIndex, setPhotoIndex] = useState(0);
   const [pulseIndex, setPulseIndex] = useState<number | null>(null);
   const [lightboxImage, setLightboxImage] = useState<{
     src: string;
@@ -54,19 +55,65 @@ export default function LabProcessInfographic() {
     width: number;
     height: number;
   } | null>(null);
+  const thumbStripRef = useRef<HTMLDivElement>(null);
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const currentStage = labProcessStages[activeStage];
   const photos = getStagePhotos(currentStage);
   const stageLabel = t(currentStage.labelKey);
+  const currentPhoto = photos[photoIndex] ?? photos[0];
+  const currentAlt = `${stageLabel} — ${t("lab_process_photo_alt")} ${photoIndex + 1}`;
+
+  useEffect(() => {
+    const strip = thumbStripRef.current;
+    const activeThumb = strip?.querySelector<HTMLElement>(`[data-index="${photoIndex}"]`);
+    activeThumb?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [photoIndex, activeStage]);
+
+  const goPrev = useCallback(() => {
+    setPhotoIndex((index) => (index - 1 + photos.length) % photos.length);
+  }, [photos.length]);
+
+  const goNext = useCallback(() => {
+    setPhotoIndex((index) => (index + 1) % photos.length);
+  }, [photos.length]);
 
   const handleStageClick = useCallback((index: number) => {
     setActiveStage(index);
+    setPhotoIndex(0);
     setPulseIndex(index);
     window.setTimeout(() => setPulseIndex(null), 450);
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 48) {
+      if (delta > 0) goPrev();
+      else goNext();
+    }
+    touchStartX.current = null;
+  };
+
+  const openLightbox = useCallback(() => {
+    if (!currentPhoto) return;
+    setLightboxImage({
+      src: currentPhoto,
+      alt: currentAlt,
+      width: GALLERY_IMAGE_SIZE,
+      height: GALLERY_IMAGE_SIZE,
+    });
+  }, [currentAlt, currentPhoto]);
+
   const zoomLabels = {
     close: t("info_image_close"),
+    back: t("info_image_back"),
+    returnOverview: t("info_image_return_overview"),
     zoomIn: t("info_image_zoom_in"),
     zoomOut: t("info_image_zoom_out"),
     reset: t("info_image_zoom_reset"),
@@ -75,7 +122,7 @@ export default function LabProcessInfographic() {
 
   return (
     <>
-      <div className={styles.root}>
+      <div className={styles.root} ref={scrollAnchorRef}>
         <div
           className={styles.stageChain}
           role="tablist"
@@ -130,40 +177,98 @@ export default function LabProcessInfographic() {
           aria-labelledby={`lab-stage-tab-${currentStage.id}`}
           className={styles.galleryPanel}
         >
-          <div key={activeStage} className={styles.gallery}>
-            {photos.map((src, photoIndex) => {
-              const alt = `${stageLabel} — ${t("lab_process_photo_alt")} ${photoIndex + 1}`;
-
-              return (
+          <div key={activeStage} className={styles.carousel}>
+            <div
+              className={styles.carouselViewport}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              {photos.length > 1 && (
                 <button
-                  key={`${currentStage.id}-${src}-${photoIndex}`}
                   type="button"
-                  className={styles.galleryItem}
-                  aria-label={`${t("info_image_zoom")}: ${alt}`}
-                  onClick={() =>
-                    setLightboxImage({
-                      src,
-                      alt,
-                      width: GALLERY_IMAGE_SIZE,
-                      height: GALLERY_IMAGE_SIZE,
-                    })
-                  }
+                  className={styles.carouselNav}
+                  onClick={goPrev}
+                  aria-label={t("gallery_prev")}
                 >
-                  <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    sizes="(max-width: 768px) 72px, (max-width: 1200px) 100px, 120px"
-                    className={styles.galleryImage}
-                  />
-                  <span className={styles.galleryZoomHint} aria-hidden="true">
-                    <ZoomIn size={16} />
-                  </span>
+                  <ChevronLeft size={22} />
                 </button>
-              );
-            })}
+              )}
+
+              <button
+                type="button"
+                className={styles.carouselMain}
+                aria-label={`${t("info_image_zoom")}: ${currentAlt}`}
+                onClick={openLightbox}
+              >
+                {currentPhoto && (
+                  <Image
+                    key={`${currentStage.id}-${currentPhoto}-${photoIndex}`}
+                    src={currentPhoto}
+                    alt={currentAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 900px"
+                    className={styles.carouselImage}
+                    priority
+                  />
+                )}
+                <span className={styles.carouselZoomHint} aria-hidden="true">
+                  <ZoomIn size={22} />
+                </span>
+              </button>
+
+              {photos.length > 1 && (
+                <button
+                  type="button"
+                  className={`${styles.carouselNav} ${styles.carouselNavNext}`}
+                  onClick={goNext}
+                  aria-label={t("gallery_next")}
+                >
+                  <ChevronRight size={22} />
+                </button>
+              )}
+            </div>
+
+            {photos.length > 1 && (
+              <div className={styles.carouselMeta}>
+                <p className={styles.carouselCounter}>
+                  {photoIndex + 1} / {photos.length}
+                </p>
+                <div ref={thumbStripRef} className={styles.thumbStrip}>
+                  {photos.map((src, index) => {
+                    const thumbAlt = `${stageLabel} — ${t("lab_process_photo_alt")} ${index + 1}`;
+                    const isActive = index === photoIndex;
+
+                    return (
+                      <button
+                        key={`${currentStage.id}-thumb-${src}-${index}`}
+                        type="button"
+                        data-index={index}
+                        className={[
+                          styles.thumbItem,
+                          isActive ? styles.thumbItemActive : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                        aria-label={thumbAlt}
+                        aria-current={isActive ? "true" : undefined}
+                        onClick={() => setPhotoIndex(index)}
+                      >
+                        <Image
+                          src={src}
+                          alt=""
+                          fill
+                          sizes="72px"
+                          className={styles.thumbImage}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <p className={styles.galleryHint}>{t("info_image_zoom_hint")}</p>
           </div>
-          <p className={styles.galleryHint}>{t("info_image_zoom_hint")}</p>
         </div>
       </div>
 
@@ -172,6 +277,7 @@ export default function LabProcessInfographic() {
           key={lightboxImage.src}
           image={lightboxImage}
           labels={zoomLabels}
+          restoreScrollRef={scrollAnchorRef}
           onClose={() => setLightboxImage(null)}
         />
       )}

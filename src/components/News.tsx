@@ -3,18 +3,128 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { Calendar, X, ChevronRight, ChevronLeft, ZoomIn, Newspaper } from "lucide-react";
-import { newsData, NewsItem } from "@/data/mockData";
+import { newsData, NewsItem, NewsHighlight } from "@/data/mockData";
 import { useLang } from "@/context/LangContext";
+import type { Lang } from "@/translations";
+
+function renderInlineMarkdown(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={index} className="font-semibold text-[#0F2C59]">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    return part;
+  });
+}
+
+function getHighlightContent(highlight: NewsHighlight, lang: Lang) {
+  const isKZ = lang === "KZ";
+  const isEN = lang === "EN";
+
+  return {
+    heading:
+      isEN && highlight.heading_en
+        ? highlight.heading_en
+        : isKZ && highlight.heading_kz
+          ? highlight.heading_kz
+          : highlight.heading,
+    body:
+      isEN && highlight.body_en
+        ? highlight.body_en
+        : isKZ && highlight.body_kz
+          ? highlight.body_kz
+          : highlight.body,
+    figureAlt:
+      isEN && highlight.figure.alt_en
+        ? highlight.figure.alt_en
+        : isKZ && highlight.figure.alt_kz
+          ? highlight.figure.alt_kz
+          : highlight.figure.alt,
+    figureCaption:
+      isEN && highlight.figure.caption_en
+        ? highlight.figure.caption_en
+        : isKZ && highlight.figure.caption_kz
+          ? highlight.figure.caption_kz
+          : highlight.figure.caption,
+  };
+}
+
+function NewsHighlightBlock({
+  highlight,
+  lang,
+  onImageClick,
+}: {
+  highlight: NewsHighlight;
+  lang: Lang;
+  onImageClick?: () => void;
+}) {
+  const { heading, body, figureAlt, figureCaption } = getHighlightContent(
+    highlight,
+    lang,
+  );
+
+  return (
+    <div className="space-y-4 pt-1">
+      <h4 className="text-[#0F2C59] font-bold text-base sm:text-lg leading-snug">
+        {heading}
+      </h4>
+
+      {body
+        .split("\n\n")
+        .filter(Boolean)
+        .map((paragraph, index) => (
+          <p key={index} className="whitespace-pre-line">
+            {renderInlineMarkdown(paragraph)}
+          </p>
+        ))}
+
+      <figure className="mx-auto w-full sm:w-[80%] md:w-[70%]">
+        <button
+          type="button"
+          onClick={onImageClick}
+          className="group relative w-full overflow-hidden rounded-[10px] shadow-[0_8px_24px_rgba(15,44,89,0.12)] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
+          aria-label={figureAlt}
+        >
+          <Image
+            src={highlight.figure.src}
+            alt={figureAlt}
+            width={highlight.figure.width}
+            height={highlight.figure.height}
+            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            sizes="(max-width: 640px) 100vw, 70vw"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200 flex items-center justify-center">
+            <ZoomIn
+              size={28}
+              className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 drop-shadow-lg"
+            />
+          </div>
+        </button>
+        <figcaption className="mt-3 text-center text-[#0F2C59] text-sm sm:text-base font-semibold leading-snug">
+          {renderInlineMarkdown(figureCaption)}
+        </figcaption>
+      </figure>
+    </div>
+  );
+}
 
 /* ─── Photo Lightbox ─────────────────────────────────────────────────────── */
 function PhotoLightbox({
   images,
   startIndex,
   onClose,
+  lockBody = false,
 }: {
   images: string[];
   startIndex: number;
   onClose: () => void;
+  lockBody?: boolean;
 }) {
   const [current, setCurrent] = useState(startIndex);
   const prev = useCallback(
@@ -25,6 +135,14 @@ function PhotoLightbox({
     () => setCurrent((c) => (c + 1) % images.length),
     [images.length]
   );
+
+  useEffect(() => {
+    if (!lockBody) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lockBody]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -123,8 +241,28 @@ function NewsModal({ item, onClose }: { item: NewsItem; onClose: () => void }) {
   const title = isEN && item.title_en ? item.title_en : isKZ && item.title_kz ? item.title_kz : item.title;
   const date = isEN && item.date_en ? item.date_en : isKZ && item.date_kz ? item.date_kz : item.date;
   const fullText = isEN && item.fullText_en ? item.fullText_en : isKZ && item.fullText_kz ? item.fullText_kz : item.fullText;
+  const paragraphs = fullText.split("\n\n").filter(Boolean);
+  const highlightInsertAt = item.highlight?.insertAfterParagraph ?? -1;
+  const showTopGallery =
+    item.galleryImages.length > 0 && !item.highlight?.figure;
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [highlightLightbox, setHighlightLightbox] = useState(false);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (lightboxIndex !== null || highlightLightbox) return;
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, lightboxIndex, highlightLightbox]);
 
   return (
     <>
@@ -159,39 +297,50 @@ function NewsModal({ item, onClose }: { item: NewsItem; onClose: () => void }) {
           </div>
 
           {/* Gallery — click to open lightbox */}
-          <div className="px-6 pb-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {item.galleryImages.map((src, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setLightboxIndex(idx)}
-                  className="relative aspect-video rounded-xl overflow-hidden group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
-                  aria-label={`Открыть фото ${idx + 1}`}
-                >
-                  <Image
-                    src={src}
-                    alt={`Фото ${idx + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    sizes="280px"
-                  />
-                  {/* Zoom icon overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                    <ZoomIn
-                      size={24}
-                      className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+          {showTopGallery && (
+            <div className="px-6 pb-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {item.galleryImages.map((src, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setLightboxIndex(idx)}
+                    className="relative aspect-video rounded-xl overflow-hidden group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
+                    aria-label={`Открыть фото ${idx + 1}`}
+                  >
+                    <Image
+                      src={src}
+                      alt={`Фото ${idx + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      sizes="280px"
                     />
-                  </div>
-                </button>
-              ))}
+                    {/* Zoom icon overlay */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                      <ZoomIn
+                        size={24}
+                        className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                      />
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Full text */}
           <div className="px-6 pb-7">
-            <div className="text-[#1E3E62] text-sm sm:text-base leading-relaxed space-y-3">
-              {fullText.split("\n\n").map((para, i) => (
-                <p key={i} className="whitespace-pre-line">{para}</p>
+            <div className="text-[#1E3E62] text-sm sm:text-base leading-relaxed space-y-4">
+              {paragraphs.map((para, i) => (
+                <div key={i} className="space-y-4">
+                  <p className="whitespace-pre-line">{renderInlineMarkdown(para)}</p>
+                  {item.highlight && i === highlightInsertAt && (
+                    <NewsHighlightBlock
+                      highlight={item.highlight}
+                      lang={lang}
+                      onImageClick={() => setHighlightLightbox(true)}
+                    />
+                  )}
+                </div>
               ))}
             </div>
           </div>
@@ -204,6 +353,14 @@ function NewsModal({ item, onClose }: { item: NewsItem; onClose: () => void }) {
           images={item.galleryImages}
           startIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
+        />
+      )}
+
+      {highlightLightbox && item.highlight?.figure && (
+        <PhotoLightbox
+          images={[item.highlight.figure.src]}
+          startIndex={0}
+          onClose={() => setHighlightLightbox(false)}
         />
       )}
     </>
@@ -241,30 +398,32 @@ function NewsCard({ item, onOpen }: { item: NewsItem; onOpen: () => void }) {
         </p>
 
         {/* Preview images — hover to zoom, click to open lightbox */}
-        <div className="grid grid-cols-2 gap-2">
-          {item.previewImages.map((src, idx) => (
-            <button
-              key={idx}
-              onClick={() => setLightboxIndex(idx)}
-              className="relative aspect-video rounded-lg overflow-hidden group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
-              aria-label={`Открыть фото ${idx + 1}`}
-            >
-              <Image
-                src={src}
-                alt={`Превью ${idx + 1}`}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                sizes="200px"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
-                <ZoomIn
-                  size={20}
-                  className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+        {item.previewImages.length > 0 && (
+          <div className="grid grid-cols-2 gap-2">
+            {item.previewImages.map((src, idx) => (
+              <button
+                key={idx}
+                onClick={() => setLightboxIndex(idx)}
+                className="relative aspect-video rounded-lg overflow-hidden group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#4A90E2]"
+                aria-label={`Открыть фото ${idx + 1}`}
+              >
+                <Image
+                  src={src}
+                  alt={`Превью ${idx + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  sizes="200px"
                 />
-              </div>
-            </button>
-          ))}
-        </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
+                  <ZoomIn
+                    size={20}
+                    className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Button */}
         <button
@@ -285,6 +444,7 @@ function NewsCard({ item, onOpen }: { item: NewsItem; onOpen: () => void }) {
           images={item.previewImages}
           startIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
+          lockBody
         />
       )}
     </>

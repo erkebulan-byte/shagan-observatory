@@ -1,6 +1,7 @@
 .wrapper {
   width: 100%;
   padding: 0.25rem 0 0.5rem;
+  overflow: hidden;
 }
 
 .layout {
@@ -87,6 +88,8 @@
   align-items: center;
   opacity: 0;
   transform: scale(0.88);
+  overflow: visible;
+  min-width: 0;
 }
 
 .centerWrapVisible {
@@ -114,27 +117,27 @@
 }
 
 .centerGlow::before {
-  inset: -10px;
+  inset: -8px;
   background: radial-gradient(
     circle,
-    rgba(34, 197, 94, 0.55) 0%,
-    rgba(34, 197, 94, 0.28) 42%,
+    rgba(34, 197, 94, 0.5) 0%,
+    rgba(34, 197, 94, 0.24) 42%,
     rgba(34, 197, 94, 0.08) 68%,
     transparent 78%
   );
-  filter: blur(6px);
+  filter: blur(5px);
   animation: pulseGlowHaloNear 3.4s ease-in-out infinite;
 }
 
 .centerGlow::after {
-  inset: -28px;
+  inset: -20px;
   background: radial-gradient(
     circle,
-    rgba(74, 222, 128, 0.32) 0%,
-    rgba(34, 197, 94, 0.16) 45%,
+    rgba(74, 222, 128, 0.28) 0%,
+    rgba(34, 197, 94, 0.14) 45%,
     transparent 72%
   );
-  filter: blur(14px);
+  filter: blur(12px);
   animation: pulseGlowHaloFar 3.4s ease-in-out infinite 0.2s;
 }
 
@@ -145,45 +148,50 @@
   height: 100%;
   border-radius: 9999px;
   background: #ffffff;
-  overflow: visible;
+  overflow: hidden;
   border: 2px solid rgba(34, 197, 94, 0.28);
   box-shadow:
     0 0 0 4px rgba(187, 247, 208, 0.45),
-    0 0 18px rgba(34, 197, 94, 0.55),
-    0 0 36px rgba(34, 197, 94, 0.38),
-    0 0 64px rgba(34, 197, 94, 0.22),
-    0 0 96px rgba(74, 222, 128, 0.14),
-    inset 0 0 24px rgba(34, 197, 94, 0.08);
+    0 0 18px rgba(34, 197, 94, 0.45),
+    inset 0 0 20px rgba(34, 197, 94, 0.08);
   animation: pulseGlowCore 3.4s ease-in-out infinite;
+  contain: paint;
 }
 
 .centerSvg {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .centerDisc {
   fill: #ffffff;
 }
 
+.centerClipGroup {
+  transform-origin: 120px 120px;
+}
+
 .centerTextRing {
   transform-origin: 120px 120px;
   transform-box: view-box;
-  animation: centerTextSpin 30s linear infinite;
+  animation: centerTextSpin 42s linear infinite;
   will-change: transform;
 }
 
 .centerTextTop,
 .centerTextBottom {
   fill: #0f2c59;
-  font-size: 10.75px;
+  font-size: 8.25px;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
 .centerTextBottom {
+  fill: #1e3e62;
+  font-size: 7.75px;
+  font-weight: 600;
   letter-spacing: 0.01em;
 }
 
@@ -203,7 +211,7 @@
   }
 
   .grid {
-    grid-template-columns: 1fr 13.5rem 1fr;
+    grid-template-columns: minmax(0, 1fr) 13.5rem minmax(0, 1fr);
     grid-template-rows: auto auto;
     column-gap: 1.25rem;
     row-gap: 1.25rem;
@@ -244,9 +252,12 @@
     height: 14.5rem;
   }
 
-  .centerTextTop,
+  .centerTextTop {
+    font-size: 8.75px;
+  }
+
   .centerTextBottom {
-    font-size: 11px;
+    font-size: 8.25px;
   }
 
   .card {
@@ -265,7 +276,7 @@
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr 16rem 1fr;
+    grid-template-columns: minmax(0, 1fr) 16rem minmax(0, 1fr);
     column-gap: 1.5rem;
     row-gap: 1.5rem;
   }
@@ -275,10 +286,13 @@
     height: 16rem;
   }
 
-  .centerTextTop,
+  .centerTextTop {
+    font-size: 9px;
+    letter-spacing: 0.03em;
+  }
+
   .centerTextBottom {
-    font-size: 11.5px;
-    letter-spacing: 0.025em;
+    font-size: 8.5px;
   }
 }
 

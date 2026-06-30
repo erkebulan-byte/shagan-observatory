@@ -154,6 +154,20 @@
   color: #4a90e2;
 }
 
+.viewCloserIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  padding: 0.35rem 0.45rem;
+  border-radius: 0.5rem;
+  background: #ebf3fc;
+}
+
+.viewCloserIcons svg {
+  color: #4a90e2;
+}
+
 @keyframes hotspotPulse {
   0%,
   100% {

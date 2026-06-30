@@ -251,86 +251,227 @@
 
 .galleryPanel {
   width: 100%;
-  overflow-x: auto;
 }
 
-@media (min-width: 768px) {
-  .galleryPanel {
-    overflow-x: visible;
-  }
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 3px;
+.carousel {
   width: 100%;
-  min-width: 36rem;
   animation: labGalleryFadeIn 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  .gallery {
-    min-width: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .gallery {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    min-width: 0;
-  }
-}
-
-.galleryItem {
+.carouselViewport {
   position: relative;
-  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.carouselMain {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 16 / 10;
+  min-height: 12rem;
+  max-height: 28rem;
   overflow: hidden;
-  background: #f3f4f6;
+  background: #eef2f6;
   padding: 0;
-  border: none;
+  border: 1px solid #dbe4ee;
+  border-radius: 0.75rem;
   cursor: zoom-in;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.galleryItem:hover {
-  box-shadow: inset 0 0 0 2px rgba(31, 95, 150, 0.35);
+.carouselMain:hover {
+  border-color: #9ec0e0;
+  box-shadow: 0 10px 28px rgba(31, 95, 150, 0.12);
 }
 
-.galleryItem:focus {
+.carouselMain:focus {
   outline: none;
 }
 
-.galleryItem:focus-visible {
-  box-shadow: inset 0 0 0 2px #1f5f96;
+.carouselMain:focus-visible {
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.35);
 }
 
-.galleryItem:hover .galleryImage {
-  transform: scale(1.04);
+.carouselMain:hover .carouselImage {
+  transform: scale(1.02);
 }
 
-.galleryItem:hover .galleryZoomHint {
+.carouselMain:hover .carouselZoomHint {
   opacity: 1;
 }
 
-.galleryImage {
+.carouselImage {
   object-fit: cover;
-  transition: transform 0.25s ease;
+  transition: transform 0.35s ease, opacity 0.25s ease;
 }
 
-.galleryZoomHint {
+.carouselZoomHint {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 44, 89, 0.25);
+  background: rgba(15, 44, 89, 0.22);
   color: #ffffff;
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
+}
+
+.carouselNav {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid #d5e3f0;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #1f5f96;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.carouselNav:hover {
+  background: #ebf3fc;
+  border-color: #9ec0e0;
+}
+
+.carouselNav:focus {
+  outline: none;
+}
+
+.carouselNav:focus-visible {
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.35);
+}
+
+.carouselNav:active {
+  transform: scale(0.96);
+}
+
+.carouselMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.carouselCounter {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.thumbStrip {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.15rem 0.25rem 0.35rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.thumbStrip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbStrip::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.thumbItem {
+  position: relative;
+  flex: 0 0 4.5rem;
+  width: 4.5rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  background: #f3f4f6;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.thumbItem:hover {
+  border-color: #9ec0e0;
+}
+
+.thumbItem:focus {
+  outline: none;
+}
+
+.thumbItem:focus-visible {
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.35);
+}
+
+.thumbItemActive {
+  border-color: #1f5f96;
+  box-shadow: 0 4px 12px rgba(31, 95, 150, 0.18);
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .carouselMain {
+    min-height: 16rem;
+  }
+
+  .carouselNav {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .thumbItem {
+    flex-basis: 5rem;
+    width: 5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .carouselViewport {
+    position: relative;
+    gap: 0;
+  }
+
+  .carouselNav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 4px 14px rgba(15, 44, 89, 0.12);
+  }
+
+  .carouselNav:first-of-type {
+    left: 0.5rem;
+  }
+
+  .carouselNavNext {
+    right: 0.5rem;
+  }
+
+  .carouselMain {
+    width: 100%;
+  }
 }
 
 .galleryHint {
